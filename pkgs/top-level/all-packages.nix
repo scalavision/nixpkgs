@@ -21425,6 +21425,8 @@ in
 
   zn_poly = callPackage ../development/libraries/science/math/zn_poly { };
 
+  yeppp = callPackage ../development/libraries/science/math/yeppp { };
+
   ### SCIENCE/MOLECULAR-DYNAMICS
 
   dl-poly-classic-mpi = callPackage ../applications/science/molecular-dynamics/dl-poly-classic {
