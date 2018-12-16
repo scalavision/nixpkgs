@@ -14,6 +14,7 @@
 , taggedLayout ? ((enableRelease && enableDebug) || (enableSingleThreaded && enableMultiThreaded) || (enableShared && enableStatic))
 , patches ? []
 , mpi ? null
+, avoidBoostStaticBug ? false
 
 # Attributes inherit from specific versions
 , version, src
@@ -61,19 +62,10 @@ let
     else
       "$NIX_BUILD_CORES";
 
-  b2Args = concatStringsSep " " ([
-    "--includedir=$dev/include"
-    "--libdir=$out/lib"
-    "-j${jobs}"
-    "--layout=${layout}"
-    "variant=${variant}"
-    "threading=${threading}"
-    "link=${link}"
-    "-sEXPAT_INCLUDE=${expat.dev}/include"
-    "-sEXPAT_LIBPATH=${expat.out}/lib"
-
-    # TODO: make this unconditional
-  ] ++ optionals (stdenv.hostPlatform != stdenv.buildPlatform) [
+  b2ExtraArgs = if avoidBoostStaticBug then [
+      "address-model=${toString stdenv.hostPlatform.parsed.cpu.bits}"
+      "architecture=${toString stdenv.hostPlatform.parsed.cpu.family}"
+    ] else optionals (stdenv.hostPlatform != stdenv.buildPlatform) [
     "address-model=${toString stdenv.hostPlatform.parsed.cpu.bits}"
     "architecture=${toString stdenv.hostPlatform.parsed.cpu.family}"
     "binary-format=${toString stdenv.hostPlatform.parsed.kernel.execFormat.name}"
@@ -92,7 +84,21 @@ let
     ++ optional (mpi != null || stdenv.hostPlatform != stdenv.buildPlatform) "--user-config=user-config.jam"
     ++ optionals (stdenv.hostPlatform.libc == "msvcrt") [
     "threadapi=win32"
-  ]);
+  ];
+
+  b2Args = concatStringsSep " " ([
+    "--includedir=$dev/include"
+    "--libdir=$out/lib"
+    "-j${jobs}"
+    "--layout=${layout}"
+    "variant=${variant}"
+    "threading=${threading}"
+    "link=${link}"
+    "-sEXPAT_INCLUDE=${expat.dev}/include"
+    "-sEXPAT_LIBPATH=${expat.out}/lib"
+
+    # TODO: make this unconditional
+  ] ++ b2ExtraArgs);
 
 in
 

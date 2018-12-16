@@ -21458,6 +21458,14 @@ in
 
   bwa = callPackage ../applications/science/biology/bwa { };
 
+  manta = callPackage ../applications/science/biology/manta {
+    boost = boost159.override {
+      avoidBoostStaticBug = false;
+      enableShared = false;
+      enableStatic = true;
+    };
+  };
+
   ### SCIENCE/MACHINE LEARNING
 
   sc2-headless = callPackage ../applications/science/machine-learning/sc2-headless {
