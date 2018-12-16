@@ -21460,7 +21460,6 @@ in
 
   manta = callPackage ../applications/science/biology/manta {
     boost = boost159.override {
-      avoidBoostStaticBug = false;
       enableShared = false;
       enableStatic = true;
     };
