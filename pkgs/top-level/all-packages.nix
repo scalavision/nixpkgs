@@ -21513,6 +21513,8 @@ in
 
   picard-tools = callPackage ../applications/science/biology/picard-tools { };
 
+  nextflow = callPackage ../applications/science/biology/nextflow { };
+  
   platypus = callPackage ../applications/science/biology/platypus { };
 
   plink = callPackage ../applications/science/biology/plink { };
