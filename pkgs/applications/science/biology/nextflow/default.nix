@@ -35,75 +35,32 @@ let
   };
 
 in stdenv.mkDerivation {
-  #https://github.com/nextflow-io/nextflow/archive/v19.01.0.tar.gz
+
   inherit name src;
 
   nativeBuildInputs = [ makeWrapper ];
   buildInputs = [ perl gradle ];
-
-  # unpackPhase = "true";
   dontConfigure = true;
-  # dontBuild = true;
 
   buildPhase = ''
-    echo "### Building main project nextflow"
     export GRADLE_USER_HOME=$(mktemp -d)
     export JAVA_HOME=${openjdk}
-    export MAVEN_HOME=${deps}
-    export M2_HOME=${deps}
-    
-    echo "running gradle command, with home dir: $GRADLE_USER_HOME"
-    echo $(pwd)
-
-    # point to offline repo
-    
-    echo "maven repos: $MAVEN_HOME"
+    # export MAVEN_HOME=${deps}
+    # export M2_HOME=${deps}
 
     substituteInPlace build.gradle \
       --replace "mavenCentral()" "mavenLocal()" \
       --replace "maven { url 'http://uk.maven.org/maven2' }" "maven { url uri('${deps}') }"
-      # --replace "mavenCentral()" "mavenLocal()"
 
-    cat build.gradle | grep uri
-
-    echo "### trying to build with gradle ..."
-    
-    # make compile
     mkdir -p $out/.nextflow
     export NXF_HOME=$out/.nextflow
 
-    # gradle -Dmaven.repo.local=${deps}  --offline --no-daemon compile -x test
-    # gradle -Dmaven.repo.local=${deps}  --offline --no-daemon assemble -x test
     gradle -Dmaven.repo.local=${deps}  --offline --no-daemon packAll -x test
-
-    echo "### Finished building"
-    ls -hal
-
-    echo "### Is there a release?"
-    echo "build"
-
-    ls -hal build/
-
-    echo "wrapper"
-
-    ls -hal gradle/wrapper
-
-    echo "nextflow"
-    ls -hal modules/nextflow
-
-    find . -name "*.jar"
-
-    # make pack
-    # gradle --offline --no-daemon build
-    #make compile
-    #make pack
-    #make install
   '';
 
   installPhase = ''
     runHook preInstall
 
-    # make install
     mkdir -p $out/bin/
     cp build/releases/next* $out/bin/nextflow
     chmod +x $out/bin/nextflow
