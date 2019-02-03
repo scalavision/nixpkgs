@@ -45,8 +45,6 @@ in stdenv.mkDerivation {
   buildPhase = ''
     export GRADLE_USER_HOME=$(mktemp -d)
     export JAVA_HOME=${openjdk}
-    # export MAVEN_HOME=${deps}
-    # export M2_HOME=${deps}
 
     substituteInPlace build.gradle \
       --replace "mavenCentral()" "mavenLocal()" \
