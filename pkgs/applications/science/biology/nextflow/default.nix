@@ -52,6 +52,17 @@ in stdenv.mkDerivation {
       --replace "mavenCentral()" "mavenLocal()" \
       --replace "maven { url 'http://uk.maven.org/maven2' }" "maven { url uri('${deps}') }"
 
+    # Leave, as the next version will have this template.
+    # substituteInPlace ./modules/nextflow/src/main/resources/nextflow/executor/command-run.txt \
+    #  --replace "#!/bin/bash" "#!/usr/bin/env bash"
+
+    substituteInPlace ./modules/nextflow/src/main/groovy/nextflow/executor/BashWrapperBuilder.groovy \
+      --replace /bin/bash "/usr/bin/env bash" \
+      --replace "wrapper << '#!/bin/bash' << ENDL" "wrapper << '#!/usr/bin/env bash' << ENDL" \
+      --replace "newLine stub, '#!/bin/bash'" "newLine stub, '#!/usr/bin/env bash'"
+
+    # cat ./modules/nextflow/src/main/groovy/nextflow/executor/BashWrapperBuilder.groovy
+
     mkdir -p $out/.nextflow
     export NXF_HOME=$out/.nextflow
 
