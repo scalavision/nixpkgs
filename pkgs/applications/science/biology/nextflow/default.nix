@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, gradle, perl, openjdk, jre,  makeWrapper }:
+{ stdenv, fetchFromGitHub, gradle, perl, bash, openjdk, jre,  makeWrapper }:
 
 let 
   name = "nextflow";
@@ -38,7 +38,7 @@ in stdenv.mkDerivation {
 
   inherit name src;
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper bash ];
   buildInputs = [ perl gradle ];
   dontConfigure = true;
 
@@ -54,10 +54,16 @@ in stdenv.mkDerivation {
     # substituteInPlace ./modules/nextflow/src/main/resources/nextflow/executor/command-run.txt \
     #  --replace "#!/bin/bash" "#!/usr/bin/env bash"
 
+    # --replace /bin/bash "/usr/bin/env bash"
+    # --replace '/bin/bash' '${bash}/bin/bash' \
+    # --replace "/bin/bash " "${bash}/bin/bash " \
+    
     substituteInPlace ./modules/nextflow/src/main/groovy/nextflow/executor/BashWrapperBuilder.groovy \
-      --replace /bin/bash "/usr/bin/env bash" \
-      --replace "wrapper << '#!/bin/bash' << ENDL" "wrapper << '#!/usr/bin/env bash' << ENDL" \
-      --replace "newLine stub, '#!/bin/bash'" "newLine stub, '#!/usr/bin/env bash'"
+      --replace "wrapper << '#!/bin/bash' << ENDL" "wrapper << '#!${bash}/bin/bash' << ENDL" \
+      --replace "newLine stub, '#!/bin/bash'" "newLine stub, '#!${bash}/bin/bash'"
+
+#      --replace "wrapper << '#!/bin/bash' << ENDL" "wrapper << '#!/usr/bin/env bash' << ENDL" \
+#      --replace "newLine stub, '#!/bin/bash'" "newLine stub, '#!/usr/bin/env bash'"
 
     # cat ./modules/nextflow/src/main/groovy/nextflow/executor/BashWrapperBuilder.groovy
 
