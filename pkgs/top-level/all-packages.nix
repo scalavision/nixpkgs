@@ -22285,6 +22285,8 @@ in
     mpi = true;
   });
 
+  delly = callPackage ../applications/science/biology/delly { };
+  
   samtools = callPackage ../applications/science/biology/samtools { };
   samtools_0_1_19 = callPackage ../applications/science/biology/samtools/samtools_0_1_19.nix {
     stdenv = gccStdenv;
