@@ -16,13 +16,13 @@ stdenv.mkDerivation rec {
 
     buildPhase = ''
         make
-        make install
-        ls -hal bin
     '';
 
     installPhase = ''
         mkdir -p $out/bin
-        cp bin/delly $out/bin/delly
+        # TODO: also add a path to the htslib, in RPATH, otherwise probably everything is good
+        cp src/delly $out/bin/delly    
+        export PATH=$PATH:$out/bin/delly
     '';
 
 }
