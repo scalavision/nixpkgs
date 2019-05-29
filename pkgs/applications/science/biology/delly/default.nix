@@ -4,7 +4,7 @@ stdenv.mkDerivation rec {
 
     name = "${pname}-${version}";
     pname = "delly";
-    version = "0.7.9";
+    version = "0.8.1";
 
     src = fetchgit {
         url = "https://github.com/dellytools/delly.git";
@@ -14,21 +14,13 @@ stdenv.mkDerivation rec {
 
     buildInputs = [ zlib htslib bzip2 lzma ncurses boost ];
 
-    postUnpack = ''
-        echo "${htslib}"
-        ls -hal
-        cp ${htslib.src} src/htslib
-        # ls -hal ${htslib.out}
-        cp ${htslib.out}/lib/libhts.so.1.9 src/htslib
-    '';
-
     buildPhase = ''
+        export EBROOTHTSLIB=${htslib}
         make
     '';
 
     installPhase = ''
         mkdir -p $out/bin
-        # TODO: also add a path to the htslib, in RPATH, otherwise probably everything is good
         cp src/delly $out/bin/delly    
         export PATH=$PATH:$out/bin/delly
     '';
