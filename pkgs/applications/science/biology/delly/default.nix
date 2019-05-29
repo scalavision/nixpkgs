@@ -14,6 +14,14 @@ stdenv.mkDerivation rec {
 
     buildInputs = [ zlib htslib bzip2 lzma ncurses boost ];
 
+    postUnpack = ''
+        echo "${htslib}"
+        ls -hal
+        cp ${htslib.src} src/htslib
+        # ls -hal ${htslib.out}
+        cp ${htslib.out}/lib/libhts.so.1.9 src/htslib
+    '';
+
     buildPhase = ''
         make
     '';
