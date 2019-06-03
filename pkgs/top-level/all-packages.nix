@@ -22346,6 +22346,8 @@ in
 
   bwa = callPackage ../applications/science/biology/bwa { };
 
+  lumpy = callPackage ../applications/science/biology/lumpy { };
+
   ### SCIENCE/MACHINE LEARNING
 
   sc2-headless = callPackage ../applications/science/machine-learning/sc2-headless { };
