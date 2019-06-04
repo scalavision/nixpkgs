@@ -22248,6 +22248,8 @@ in
 
   htslib = callPackage ../development/libraries/science/biology/htslib { };
 
+  biod = callPackage ../development/libraries/science/biology/biod { };
+
   igv = callPackage ../applications/science/biology/igv { };
 
   inormalize = callPackage ../applications/science/biology/inormalize { };
@@ -22322,6 +22324,8 @@ in
   samtools_0_1_19 = callPackage ../applications/science/biology/samtools/samtools_0_1_19.nix {
     stdenv = gccStdenv;
   };
+
+  sambamba = callPackage ../applications/science/biology/sambamba { };
 
   snpeff = callPackage ../applications/science/biology/snpeff { };
 
