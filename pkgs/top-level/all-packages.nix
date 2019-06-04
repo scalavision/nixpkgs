@@ -22309,6 +22309,8 @@ in
 
   picard-tools = callPackage ../applications/science/biology/picard-tools { };
 
+  gatk = callPackage ../applications/science/biology/gatk3 { };
+
   platypus = callPackage ../applications/science/biology/platypus { };
 
   plink = callPackage ../applications/science/biology/plink { };
