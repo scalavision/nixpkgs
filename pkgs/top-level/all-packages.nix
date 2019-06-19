@@ -22317,6 +22317,8 @@ in
 
   cd-hit = callPackage ../applications/science/biology/cd-hit { };
 
+  ensemble-vep = callPackage ../applications/science/biology/ensemble-vep { };
+
   cmtk = callPackage ../applications/science/biology/cmtk { };
 
   clustal-omega = callPackage ../applications/science/biology/clustal-omega { };
