@@ -3,7 +3,7 @@
 }:
 
 let
-  version = "10.0";
+  version = "11.0";
   desktopItem = makeDesktopItem {
     name = "netbeans";
     exec = "netbeans";
@@ -17,8 +17,9 @@ in
 stdenv.mkDerivation {
   name = "netbeans-${version}";
   src = fetchurl {
-    url = "mirror://apache/incubator/netbeans/incubating-netbeans/incubating-${version}/incubating-netbeans-${version}-bin.zip";
-    sha512 = "ba83575f42c1d5515e2a5336a621bc2b4087b2e0bcacb6edb76f376f8272555609bdd4eefde8beae8ffc6c1a7db2fb721b844638ce27933c3dd78f71cbb41ad8";
+#    url = "mirror://apache/incubator/netbeans/incubating-netbeans/incubating-${version}/incubating-netbeans-${version}-bin.zip";
+    url = "https://www.apache.org/dyn/closer.cgi/incubator/netbeans/incubating-netbeans/incubating-11.0/incubating-netbeans-11.0-bin.zip";
+    sha512 = "3kmbqibq3r1pbanpzhinnqkpiqaxkyvd2k17zaslzaf7q3mm2pjfw0ymgmm68jrmk3w1zvi3jrvdnl0lmvfwxpsql7zqc4lgqwwayqv";
   };
 
   buildCommand = ''
