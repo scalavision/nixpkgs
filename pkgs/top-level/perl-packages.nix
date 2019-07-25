@@ -133,6 +133,18 @@ let
     propagatedBuildInputs = [ AlgorithmDiff ];
   };
 
+  AlgorithmMunkres = buildPerlPackage rec {
+    name = "Algorithm-Munkres-0.08";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/T/TP/TPEDERSE/${name}.tar.gz";
+      sha256 = "196bcda3984b179cedd847a7c16666b4f9741c07f611a65490d9e7f4b7a55626";
+    };
+    meta = {
+      description = "Munkres.pm";
+      license = stdenv.lib.licenses.unknown;
+    };
+  };
+
   AlienBuild = buildPerlPackage {
     pname = "Alien-Build";
     version = "1.65";
@@ -883,6 +895,205 @@ let
     propagatedBuildInputs = [ MathBigInt ];
   };
 
+  #  BioASN1EntrezGene = buildPerlPackage rec {
+  #   name = "Bio-ASN1-EntrezGene-1.73";
+  #   src = fetchurl {
+  #     url = "mirror://cpan/authors/id/C/CJ/CJFIELDS/${name}.tar.gz";
+  #     sha256 = "f9e778db705ce5c35ad2798e38a8490b644edfdc14253aa1b74a1f5e79fc6a4b";
+  #   };
+  #   propagatedBuildInputs = [ BioPerl ];
+  #   buildInputs = [ ModuleBuild TestMost URI TestWarn TestDeep TestDifferences TestException];
+  #   meta = {
+  #     homepage = https://metacpan.org/release/Bio-ASN1-EntrezGene;
+  #     description = "Regular expression-based Perl Parser for NCBI Entrez Gene";
+  #     license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+  #   };
+  # };
+
+  #  BioCluster = buildPerlPackage rec {
+  #   name = "Bio-Cluster-1.7.3";
+  #   src = fetchurl {
+  #     url = "mirror://cpan/authors/id/C/CJ/CJFIELDS/${name}.tar.gz";
+  #     sha256 = "1967fb3899b92f245b5bf6cb64ef076fc3f8427b1a96ca5f7b74d220b6191fbb";
+  #   };
+  #   propagatedBuildInputs = [ BioPerl XMLSAX ];
+  #   buildInputs = [ ModuleBuild TestMost URI TestWarn TestDeep TestDifferences TestException];
+  #   meta = {
+  #     homepage = https://metacpan.org/release/Bio-Cluster;
+  #     description = "BioPerl cluster modules";
+  #     license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+  #   };
+  # };
+
+  # BioDBBioFetch = buildPerlPackage rec {
+  #   name = "Bio-DB-BioFetch-1.7.3";
+  #   src = fetchurl {
+  #     url = "mirror://cpan/authors/id/C/CD/CDIESH/${name}.tar.gz";
+  #     sha256 = "8b9523bc0b3fc6a19b728157f82a8ca37f7ac400124ff125655823505d70bdba";
+  #   };
+  #   buildInputs = [ DataStag TestException TestRequiresInternet TestWarn ];
+  #   propagatedBuildInputs = [ BioPerl HTTPMessage ];
+  #   meta = {
+  #     homepage = https://metacpan.org/release/Bio-DB-BioFetch;
+  #     description = "Database object interface to BioFetch retrieval";
+  #     license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+  #   };
+  # };
+  
+  # BioDBGFF = buildPerlPackage rec {
+  #   name = "Bio-DB-GFF-1.7.3";
+  #   src = fetchurl {
+  #     url = "mirror://cpan/authors/id/C/CD/CDIESH/${name}.tar.gz";
+  #     sha256 = "c1527772c926e4fd141a166a525f418e68d055d73dafa36f0969ab5f5c3a620f";
+  #   };
+  #   buildInputs = [ ModuleBuild ];
+  #   propagatedBuildInputs = [ ApacheDBI BioDBBioFetch BioGMODCMapUtils BioPerl CGI DBI DB_File ];
+  #   meta = {
+  #     homepage = https://metacpan.org/release/Bio-DB-GFF;
+  #     description = "Storage and retrieval of sequence annotation data";
+  #     license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+  #   };
+  # };
+
+  # BioDBSeqFeature = buildPerlPackage rec {
+  #   name = "Bio-DB-SeqFeature-1.7.3";
+  #   src = fetchurl {
+  #     url = "mirror://cpan/authors/id/C/CD/CDIESH/${name}.tar.gz";
+  #     sha256 = "f643d63c62dfdb0b12149762dd2bdbcfe5b7282fc4e4d8e9cbd1967edd544aa6";
+  #   };
+  #   propagatedBuildInputs = [ BioPerl DBDPg DBDSQLite DBI DB_File ];
+  #   meta = {
+  #     homepage = https://metacpan.org/release/Bio-DB-SeqFeature;
+  #     description = "Normalized feature for use with Bio::DB::SeqFeature::Store";
+  #     license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+  #   };
+  # };
+
+  # BioSamTools = buildPerlModule rec {
+  #   name = "Bio-SamTools-1.43";
+  #   src = fetchurl {
+  #     url = "mirror://cpan/authors/id/L/LD/LDS/${name}.tar.gz";
+  #     sha256 = "7085ee5e97ad75dbbebd8583072d67b2b06d29e7a9f9741c9ac58dabe300d3fd";
+  #   };
+  #   buildInputs = [ ModuleBuild pkgs.samtools ];
+  #   propagatedBuildInputs = [ BioPerl ];
+  #   postConfigure = ''
+  #   Samtools does not have the libraries available ...
+  #     echo "########################################"
+  #     echo "PREConfigure"
+
+  #     export SAMTOOLS=${pkgs.samtools}/bin
+  #     ls -hal ${pkgs.samtools}
+  #     ls -hal ${pkgs.samtools}/share | grep libbam
+  #   '';
+  #   checkInputs = [ pkgs.samtools ];
+  #   meta = {
+  #     description = "Perl interface to SamTools library for DNA sequencing";
+  #     license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+  #   };
+
+  # };
+
+  # BioGMOD = buildPerlPackage rec {
+  #   name = "Bio-GMOD-0.028";
+  #   src = fetchurl {
+  #     url = "mirror://cpan/authors/id/T/TW/TWH/${name}.tar.gz";
+  #     sha256 = "7aedb962c38095001b158e3045ae1f1069a9671bce31be9d237da82b2979726b";
+  #   };
+  #   propagatedBuildInputs = [ LWP MIMELite ];
+  #   meta = {
+  #     license = stdenv.lib.licenses.unknown;
+  #   };
+  # };
+
+  BioPhylo = buildPerlPackage rec {
+    name = "Bio-Phylo-v2.0.1";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/R/RV/RVOSA/${name}.tar.gz";
+      sha256 = "30bf253800a12ac501222ea42d17612f0557af6329daf05465b538569a894f4d";
+    };
+    meta = {
+      homepage = http://biophylo.blogspot.com/;
+      description = "An object-oriented Perl toolkit for analyzing and manipulating phyloinformatic data";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  BioPerl = buildPerlModule rec {
+    pname = "BioPerl";
+    version = "1.007002";
+
+    src = fetchurl {
+        url = "mirror://cpan/authors/id/C/CJ/CJFIELDS/${pname}-${version}.tar.gz";
+        sha256 = "17aa3aaab2f381bbcaffdc370002eaf28f2c341b538068d6586b2276a76464a1";
+    };
+
+    prePatch = ''
+      # Renaming Build.PL to Makefile.PL
+      cp ./Build.PL ./Makefile.PL
+    '';
+
+    preConfigure = ''
+      ./Build installdeps
+    '';
+    
+    buildInputs = [ ModuleBuild TestMost URI TestWarn TestDeep TestDifferences TestException];
+
+    propagatedBuildInputs = [ 
+          DataStag 
+          IOString
+          AlgorithmMunkres
+          ArrayCompare
+          BioPhylo
+          # BioSamTools
+          CGI
+          Clone
+          ConvertBinaryC
+          DBFile
+          Error
+          GD
+          Graph
+          GraphViz
+          # HTML::Entities is not installed
+          # HTML::HeadParser is not installed
+          HTMLParser
+          HTMLTableExtract
+          HTTPMessage # HTTP::Request::Common
+          IOstringy # IO::Scalar
+          InlineC
+          LWPUserAgent
+          ListMoreUtils
+          PostScript#PostScript::TextBlock
+          SVG
+          SVGGraph
+          SetScalar
+          SortNaturally
+          SpreadsheetParseExcel
+          XMLDOM
+          XMLDOMXPath
+          XMLLibXML
+          XMLParser
+          libxml_perl # XML::Parser::PerlSAX is not installed
+          XMLSAX
+          XMLSAXWriter
+          XMLSimple
+          XMLTwig
+          XMLWriter
+          YAML
+          DBI
+          # BioASN1EntrezGene
+          DBDSQLite
+          DBDPg
+          DBDmysql
+      ];
+
+    meta = {
+      description = "Bioinformatics Toolkit";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+
+  };
+
   BitVector = buildPerlPackage {
     pname = "Bit-Vector";
     version = "7.4";
@@ -1114,7 +1325,7 @@ let
     };
     propagatedBuildInputs = [ ExtUtilsDepends ExtUtilsPkgConfig ];
   };
-
+ 
   CairoGObject = buildPerlPackage {
     pname = "Cairo-GObject";
     version = "1.004";
@@ -2840,6 +3051,19 @@ let
     };
   };
 
+  ConvertBinaryC = buildPerlPackage rec {
+    name = "Convert-Binary-C-0.78";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/M/MH/MHX/${name}.tar.gz";
+      sha256 = "24008c3f89117005d308bb2fd2317db6d086a265be6e98855109bbc12a52f2ea";
+    };
+    meta = {
+      homepage = http://search.cpan.org/~mhx/Convert-Binary-C/;
+      description = "Binary Data Conversion using C Types";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
   ConvertColor = buildPerlModule {
     pname = "Convert-Color";
     version = "0.11";
@@ -3771,6 +3995,19 @@ let
     propagatedBuildInputs = [ DataPage MathRound ];
     meta = {
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  DataStag = buildPerlPackage rec {
+    name = "Data-Stag-0.14";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/C/CM/CMUNGALL/${name}.tar.gz";
+      sha256 = "4ab122508d2fb86d171a15f4006e5cf896d5facfa65219c0b243a89906258e59";
+    };
+    propagatedBuildInputs = [ IOString ];
+    meta = {
+      description = "Structured Tags";
+      license = stdenv.lib.licenses.unknown;
     };
   };
 
@@ -6845,6 +7082,28 @@ let
     meta = {
       description = "Graph Plotting Module for Perl 5";
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  GDGraphhistogram = buildPerlPackage rec {
+    name = "GDGraph-histogram-1.1";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/W/WH/WHIZDOG/${name}.tar.gz";
+      sha256 = "20f752d0e6deb59b29aa2ec3496b5883476d00280b6e83f5b47c33fac4097f8a";
+    };
+    meta = {
+    };
+  };
+
+  GDGraphsmoothlines = buildPerlPackage rec {
+    name = "GD-Graph-smoothlines-1.6";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/A/AN/ANDREI/${name}.tar.gz";
+      sha256 = "27f5ce8a0519c347e369dc8012ef7894273118336b03ef2465e591fd65d98c2c";
+    };
+    propagatedBuildInputs = [ GD GDGraph ];
+    meta = {
+      license = stdenv.lib.licenses.unknown;
     };
   };
 
@@ -10086,6 +10345,19 @@ let
      };
   };
 
+   MathDerivative = buildPerlPackage rec {
+    name = "Math-Derivative-1.01";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/J/JG/JGAMBLE/${name}.tar.gz";
+      sha256 = "14c0b3fa05dcb74a44a9de6b4b08c3e58e672826b5f8e47535325b64f6ee69e6";
+    };
+    buildInputs = [ MathUtils ModuleBuild ];
+    meta = {
+      description = "Numeric 1st and 2nd order differentiation";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
   MathLibm = buildPerlPackage {
     pname = "Math-Libm";
     version = "1.00";
@@ -10294,6 +10566,31 @@ let
     src = fetchurl {
       url = mirror://cpan/authors/id/G/GR/GROMMEL/Math-Round-0.07.tar.gz;
       sha256 = "09wkvqj4hfq9y0fimri967rmhnq90dc2wf20lhlmqjp5hsd359vk";
+    };
+  };
+
+  MathSpline = buildPerlPackage rec {
+    name = "Math-Spline-0.02";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/C/CH/CHORNY/${name}.tar.gz";
+      sha256 = "cfd7044483f34e6fa64080bf7c4bc10ff6173410c350066fe65e090c3b81b6e9";
+    };
+    propagatedBuildInputs = [ MathDerivative ];
+    meta = {
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  MathUtils = buildPerlPackage rec {
+    name = "Math-Utils-1.13";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/J/JG/JGAMBLE/${name}.tar.gz";
+      sha256 = "0a01dc124f1e7dcadb4c5353ce52a68c7b82d741d4afc2b46a205422d2e37f08";
+    };
+    buildInputs = [ ModuleBuild ];
+    meta = {
+      description = "Useful mathematical functions not in Perl";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
     };
   };
 
@@ -13403,6 +13700,18 @@ let
     };
   };
 
+  PerlIOgzip = buildPerlPackage rec {
+    name = "PerlIO-gzip-0.20";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/N/NW/NWCLARK/${name}.tar.gz";
+      sha256 = "4848679a3f201e3f3b0c5f6f9526e602af52923ffa471a2a3657db786bd3bdc5";
+    };
+    meta = {
+      description = "Perl extension to provide a PerlIO layer to gzip/gunzip";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
   perlldap = buildPerlPackage {
     pname = "perl-ldap";
     version = "0.66";
@@ -13755,6 +14064,16 @@ let
       maintainers = [ maintainers.limeytexan ];
       description = "Reusable tests for POE::Loop authors";
       license = stdenv.lib.licenses.artistic2;
+    };
+  };
+
+  PostScript = buildPerlPackage rec {
+    name = "PostScript-0.06";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/S/SH/SHAWNPW/${name}.tar.gz";
+      sha256 = "64aa477ebf153710e4cd1251a0fa6f964ac34fcd3d9993e299e28064f9eec589";
+    };
+    meta = {
     };
   };
 
@@ -14765,6 +15084,19 @@ let
     };
   };
 
+  SetIntervalTree = buildPerlPackage rec {
+    name = "Set-IntervalTree-0.12";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/S/SL/SLOYD/${name}.tar.gz";
+      sha256 = "6fd4000e4022968e2ce5b83c07b189219ef1925ecb72977b52a6f7d76adbc349";
+    };
+    buildInputs = [ ExtUtilsCppGuess ];
+    meta = {
+      description = "Perform range-based lookups on sets of ranges";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
   SetInfinite = buildPerlPackage {
     pname = "Set-Infinite";
     version = "0.65";
@@ -15637,6 +15969,30 @@ let
       homepage = https://github.com/ingydotnet/swim-pm;
       description = "See What I Mean?!";
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  SVG = buildPerlPackage rec {
+    name = "SVG-2.84";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/M/MA/MANWAR/${name}.tar.gz";
+      sha256 = "ec3d6ddde7a46fa507eaa616b94d217296fdc0d8fbf88741367a9821206f28af";
+    };
+    meta = {
+      description = "Perl extension for generating Scalable Vector Graphics (SVG) documents";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  SVGGraph = buildPerlPackage rec {
+    name = "SVG-Graph-0.02";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/A/AL/ALLENDAY/${name}.tar.gz";
+      sha256 = "0de0dfd6c2c6a5fa952e9cc5f56077851fcaea338e1d13915458b351b37061bc";
+    };
+    propagatedBuildInputs = [ MathDerivative MathSpline SVG StatisticsDescriptive TreeDAGNode ];
+    meta = {
+      license = stdenv.lib.licenses.unknown;
     };
   };
 
@@ -19106,6 +19462,26 @@ let
       sha256 = "0phpkc4li43m2g44hdcvyxzy9pymqwlqhh5hwp2xc0cv8l5lp8lb";
     };
     propagatedBuildInputs = [ XMLRegExp libxml_perl ];
+  };
+
+  XMLDOMXPath = buildPerlPackage rec {
+    name = "XML-DOM-XPath-0.14";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/M/MI/MIROD/${name}.tar.gz";
+      sha256 = "0173a74a515211997a3117a47e7b9ea43594a04b865b69da5a71c0886fa829ea";
+    };
+    propagatedBuildInputs = [ XMLDOM XMLXPathEngine ];
+    meta = {
+      description = "Perl extension to add XPath support to XML::DOM, using XML::XPath engine";
+      license = stdenv.lib.licenses.unknown;
+    };
+
+    # Fixing this reported bug: https://rt.cpan.org/Public/Bug/Display.html?id=115098
+    prePatch = ''
+      substituteInPlace ./t/test_non_ascii.t \
+        --replace "use encoding 'utf8';" "use utf8;"
+    '';
+
   };
 
   XMLFeedPP = buildPerlPackage {
