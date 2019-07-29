@@ -1036,11 +1036,11 @@ let
     preConfigure = ''
       ./Build installdeps
     '';
-    
+
     buildInputs = [ ModuleBuild TestMost URI TestWarn TestDeep TestDifferences TestException];
 
-    propagatedBuildInputs = [ 
-          DataStag 
+    propagatedBuildInputs = [
+          DataStag
           IOString
           AlgorithmMunkres
           ArrayCompare
