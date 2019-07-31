@@ -1094,6 +1094,20 @@ let
 
   };
 
+  BioDBHTS = buildPerlModule rec {
+    name = "Bio-DB-HTS-3.01";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/A/AV/AVULLO/${name}.tar.gz";
+      sha256 = "12a6bc1f579513cac8b9167cce4e363655cc8eba26b7d9fe1170dfe95e044f42";
+    };
+    buildInputs = [ ModuleBuild ];
+    propagatedBuildInputs = [ BioPerl ];
+    meta = {
+      description = "Perl interface to HTS library for DNA sequencing";
+      license = stdenv.lib.licenses.asl20;
+    };
+  };
+
   BitVector = buildPerlPackage {
     pname = "Bit-Vector";
     version = "7.4";
