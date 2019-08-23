@@ -6094,6 +6094,8 @@ in {
   fastapi = callPackage ../development/python-modules/fastapi { };
 
   stringcase = callPackage ../development/python-modules/stringcase { };
+
+  tacl       = callPackages ../development/python-modules/tacl {};
 });
 
 in fix' (extends overrides packages)
