@@ -513,6 +513,8 @@ in {
 
   deap = callPackage ../development/python-modules/deap { };
 
+  deeptoolsintervals = callPackage ../development/python-modules/deeptoolsintervals { };
+
   dkimpy = callPackage ../development/python-modules/dkimpy { };
 
   dictionaries = callPackage ../development/python-modules/dictionaries { };
@@ -4369,6 +4371,10 @@ in {
   Babel = callPackage ../development/python-modules/Babel { };
 
   pybfd = callPackage ../development/python-modules/pybfd { };
+
+  pybigwig = callPackage ../development/python-modules/pybigwig { };
+
+  py2bit = callPackage ../development/python-modules/py2bit { };
 
   pyblock = callPackage ../development/python-modules/pyblock { };
 

@@ -23013,7 +23013,9 @@ in
   conglomerate = callPackage ../applications/science/biology/conglomerate { };
 
   dcm2niix = callPackage ../applications/science/biology/dcm2niix { };
-  
+
+  deeptools = python3Packages.callPackage ../applications/science/biology/deeptools { };
+
   delly = callPackage ../applications/science/biology/delly { };
 
   diamond = callPackage ../applications/science/biology/diamond { };
