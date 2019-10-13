@@ -6,9 +6,7 @@
 , makeWrapper
 , gcc
 }:
-
 stdenv.mkDerivation rec {
-
   name = "gatk";
   version = "4.1.4.0";
 
@@ -20,7 +18,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ makeWrapper unzip ];
 
   buildInputs = [ jre python3 gcc ];
-  
+
   phases = [ "installPhase" ];
 
   installPhase = ''
@@ -39,18 +37,16 @@ stdenv.mkDerivation rec {
   meta = with stdenv.lib; {
     description = "Offers a wide variety of tools with a primary focus on DNA variant discovery and genotyping";
     longDescription = ''
-      The industry standard for identifying SNPs and indels in germline 
-      DNA and RNAseq data. Its scope is now expanding to include somatic 
-      short variant calling, and to tackle copy number (CNV) and structural variation (SV). 
-      In addition to the variant callers themselves, the GATK also includes many utilities 
-      to perform related tasks such as processing and quality control of high-throughput 
+      The industry standard for identifying SNPs and indels in germline
+      DNA and RNAseq data. Its scope is now expanding to include somatic
+      short variant calling, and to tackle copy number (CNV) and structural variation (SV).
+      In addition to the variant callers themselves, the GATK also includes many utilities
+      to perform related tasks such as processing and quality control of high-throughput
       sequencing data, and bundles the popular Picard toolkit.
     '';
     license = licenses.bsd3;
     homepage = "https://software.broadinstitute.org/gatk/";
     maintainers = with maintainers; [ scalavision ];
     platforms = platforms.all;
-
-  }; 
-
+  };
 }
