@@ -191,6 +191,14 @@ let
     setupHook = ./setup-hook-cross.sh;
   });
 in {
+
+  perl526 = common {
+    perl = pkgs.perl528;
+    buildPerl = buildPackages.perl526;
+    version = "5.26.2";
+    sha256 = "1iynpsxdym4h76kgndmn3ykvwxhqz444xvaz8z2irsxkvmnlb5da";
+  };
+
   # the latest Maint version
   perl528 = common {
     perl = pkgs.perl528;
@@ -199,7 +207,7 @@ in {
     sha256 = "1iynpsxdym4h76kgndmn3ykvwxhqz444xvaz8z2irsxkvmnlb5da";
   };
 
-  perl530 = common {
+  perl530 = comon {
     perl = pkgs.perl530;
     buildPerl = buildPackages.perl530;
     version = "5.30.0";

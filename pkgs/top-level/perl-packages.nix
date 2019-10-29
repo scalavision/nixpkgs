@@ -5776,6 +5776,38 @@ let
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
     };
   };
+  
+  EnsemblVep = buildPerlPackage {
+    pname = "ensemble-vep";
+    version = "97.2";
+    patchPhase = ''
+      mv INSTALL.pl Makefile.PL
+    '';
+    src = fetchFromGitHub  {
+        owner = "Ensembl";
+        repo = "ensembl-vep";
+        #rev = "release/${version}";
+        rev = "e759c01f21f97040aba80daacf9ad0d25ca326df";
+        sha256 = "10f5gjqkdd1wq6kh33w80qxzjv729fx92ipgn8mkq7ww1nxdr696";  
+    };
+
+    propagatedBuildInputs = [
+        JSON
+        SetIntervalTree
+#        BioDBBigFile
+ #       PerlIOgzip
+        DBDmysql
+#        BioBigFile
+        ArchiveZip 
+        DBI
+#        BioDBHTS
+    ];
+
+    buildInputs = [ pkgs.kent pkgs.which pkgs.zlib pkgs.mysql pkgs.htslib ];
+    
+  };
+  
+  #buildPerlPackage ../applications/science/biology/ensembl-vep { };
 
   EncodeDetect = buildPerlModule {
     pname = "Encode-Detect";
@@ -13715,11 +13747,13 @@ let
   };
 
   PerlIOgzip = buildPerlPackage rec {
-    name = "PerlIO-gzip-0.20";
+    pname = "PerlIO-gzip";
+    version = "0.20";
     src = fetchurl {
-      url = "mirror://cpan/authors/id/N/NW/NWCLARK/${name}.tar.gz";
+      url = "mirror://cpan/authors/id/N/NW/NWCLARK/${pname}-${version}.tar.gz";
       sha256 = "4848679a3f201e3f3b0c5f6f9526e602af52923ffa471a2a3657db786bd3bdc5";
     };
+    buildInputs = [ pkgs.zlib ];
     meta = {
       description = "Perl extension to provide a PerlIO layer to gzip/gunzip";
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
@@ -15099,12 +15133,13 @@ let
   };
 
   SetIntervalTree = buildPerlPackage rec {
-    name = "Set-IntervalTree-0.12";
+    pname = "Set-IntervalTree";
+    version = "0.12";
     src = fetchurl {
-      url = "mirror://cpan/authors/id/S/SL/SLOYD/${name}.tar.gz";
+      url = "mirror://cpan/authors/id/S/SL/SLOYD/${pname}-${version}.tar.gz";
       sha256 = "6fd4000e4022968e2ce5b83c07b189219ef1925ecb72977b52a6f7d76adbc349";
     };
-    buildInputs = [ ExtUtilsCppGuess ];
+    buildInputs = [ pkgs.zlib ExtUtilsCppGuess ];
     meta = {
       description = "Perform range-based lookups on sets of ranges";
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];

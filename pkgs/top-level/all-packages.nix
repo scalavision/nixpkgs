@@ -780,6 +780,9 @@ in
 
   enpass = callPackage ../tools/security/enpass { };
 
+#  ensembl-vep = perlPackages.EnsemblVep;
+  ensembl-vep = perl526Packages.EnsemblVep;
+
   esh = callPackage ../tools/text/esh { };
 
   ezstream = callPackage ../tools/audio/ezstream { };
@@ -11203,6 +11206,8 @@ in
     in
       recurseIntoAttrs (makeOverridable mkFrameworks attrs);
 
+  kent = callPackage ../applications/science/biology/kent { };
+
   keybinder = callPackage ../development/libraries/keybinder {
     automake = automake111x;
     lua = lua5_1;
@@ -14133,8 +14138,9 @@ in
   ### DEVELOPMENT / PERL MODULES
 
   perlInterpreters = callPackages ../development/interpreters/perl {};
-  inherit (perlInterpreters) perl528 perl530 perldevel;
+  inherit (perlInterpreters) perl526 perl528 perl530 perldevel;
 
+  perl526Packages = recurseIntoAttrs perl526.pkgs;
   perl528Packages = recurseIntoAttrs perl528.pkgs;
   perl530Packages = recurseIntoAttrs perl530.pkgs;
   perldevelPackages = perldevel.pkgs;
