@@ -23141,6 +23141,8 @@ in
 
   exonerate = callPackage ../applications/science/biology/exonerate { };
 
+  gatk3 = callPackage ../applications/science/biology/gatk3 { };
+
   hisat2 = callPackage ../applications/science/biology/hisat2 { };
 
   htslib = callPackage ../development/libraries/science/biology/htslib { };
