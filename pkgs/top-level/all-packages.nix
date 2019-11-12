@@ -22317,7 +22317,7 @@ in
 
   cd-hit = callPackage ../applications/science/biology/cd-hit { };
 
-  ensemble-vep = callPackage ../applications/science/biology/ensemble-vep { };
+  ensembl-vep = callPackage ../applications/science/biology/ensembl-vep { };
 
   cmtk = callPackage ../applications/science/biology/cmtk { };
 

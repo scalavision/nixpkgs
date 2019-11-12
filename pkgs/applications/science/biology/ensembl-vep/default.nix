@@ -1,14 +1,21 @@
-{ stdenv, fetchFromGitHub, makeWrapper, zlib, perl, perlPackages, curl, which, unzip }:
+{ fetchurl, stdenv, fetchFromGitHub, makeWrapper, zlib, perl, perlPackages, curl, which, unzip }:
 
 let 
-    version = "96.3";
 
+    version = "98.3";
+
+    src = fetchurl {
+      url = "https://github.com/Ensembl/ensembl-vep/archive/release/98.3.tar.gz";
+      sha256 = "1msb8yrglpa32da9h7ik3fwmw5v9fz6j374h01gx6dqw0xhqv1zg";
+    };
+    /*
     src = fetchFromGitHub {
         owner = "Ensembl";
-        repo = "ensemple-vep";
+        repo = "ensempl-vep";
         rev = "release/${version}";
-        sha256 = "0nm1227f025f5wdi58ny2nxhjfrl0n2zq2qys91p96bxszwcc935";
-    };
+        sha256 = "0nm1227f025f5wdi58ny2nxhjfrl0n2zq2qys91p96bxszwcc934";
+        };
+        */
 
     deps = stdenv.mkDerivation {
         
@@ -48,8 +55,6 @@ let
 
             echo "TESTING CURL"
             curl --help
-
-            echo "ANYTING?"
 
             ls -hal ${curl}/bin
 
