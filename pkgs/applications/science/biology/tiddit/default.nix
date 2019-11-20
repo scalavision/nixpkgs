@@ -1,0 +1,76 @@
+{ lib
+, fetchFromGitHub
+, cmake
+, zlib
+, python
+, makeWrapper
+}:
+
+with python.pkgs;
+buildPythonApplication rec {
+
+  pname = "TIDDIT";
+  version = "2.8.1";
+
+  src = fetchFromGitHub {
+    owner = "SciLifeLab";
+    repo = "${pname}";
+    rev = "${pname}-${version}";
+    sha256 = "1g73sc10rn0lpw6bdr4z2qr1izw4ck2vmfkwhvqh23wqv91jsw39";
+  };
+
+  nativeBuildInputs = [ cmake ];
+  buildInputs = [ zlib makeWrapper ];
+  propagatedBuildInputs = [ numpy cython ];
+
+  buildPhase = ''
+    cd ../
+    ./INSTALL.sh
+    cd ./src
+  '';
+
+  # No tests available
+  checkPhase = false;
+  # This is called even if checkPhase is false
+  dontUsePipInstall = true;
+
+  installPhase = ''
+    cd ../
+
+    mkdir -p $out/bin/bin
+    mkdir -p $out/lib
+
+    mv ./src $out/bin/
+    mv ./lib $out/bin/
+
+    cp TIDDIT.py $out/bin
+    install -Dm555 ./bin/TIDDIT $out/bin/bin/TIDDIT
+
+    BAMTOOLS="./build/lib/bamtools/src/api"
+    cp $BAMTOOLS/libbamtools.a $out/lib 
+    cp $BAMTOOLS/libbamtools.so  $out/lib 
+    cp $BAMTOOLS/libbamtools.so.2.3.0 $out/lib
+
+    wrapProgram $out/bin/bin/TIDDIT --prefix LD_LIBRARY_PATH: $out/lib
+  '';
+
+  # Other way to override?
+  setuptoolsCheckPhase = ''
+    echo "No tests available"
+  '';
+
+  meta = with lib; {
+    homepage = "https://github.com/SciLifeLab/TIDDIT";
+    description = "Structural variant caller for mapped DNA sequenced data";
+    license = licenses.gpl3;
+    longDescription = ''
+    TIDDIT: Is a tool to used to identify chromosomal rearrangements using 
+    Mate Pair or Paired End sequencing data. 
+    TIDDIT identifies intra and inter-chromosomal translocations, deletions, 
+    tandem-duplications and inversions, using supplementary alignments 
+    as well as discordant pairs.  
+    '';
+    maintainers = with maintainers; [ scalavision ];
+  };
+
+}

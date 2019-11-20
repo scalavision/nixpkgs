@@ -23638,6 +23638,8 @@ in
 
   truvari = callPackage ../applications/science/biology/truvari { };
 
+  tiddit = callPackage ../applications/science/biology/tiddit { };
+
   varscan = callPackage ../applications/science/biology/varscan { };
 
   hmmer = callPackage ../applications/science/biology/hmmer { };
