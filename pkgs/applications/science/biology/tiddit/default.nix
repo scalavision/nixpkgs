@@ -38,7 +38,6 @@ buildPythonApplication rec {
     cd ../
 
     mkdir -p $out/bin/bin
-    mkdir -p $out/lib
 
     mv ./src $out/bin/
     mv ./lib $out/bin/
@@ -51,7 +50,7 @@ buildPythonApplication rec {
     cp $BAMTOOLS/libbamtools.so  $out/lib 
     cp $BAMTOOLS/libbamtools.so.2.3.0 $out/lib
 
-    wrapProgram $out/bin/bin/TIDDIT --prefix LD_LIBRARY_PATH: $out/lib
+    #wrapProgram $out/bin/bin/TIDDIT --prefix LD_LIBRARY_PATH: $out/lib
   '';
 
   # Other way to override?
