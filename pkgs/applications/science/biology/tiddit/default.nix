@@ -3,7 +3,7 @@
 , cmake
 , zlib
 , python
-, makeWrapper
+, bash
 }:
 
 with python.pkgs;
@@ -19,9 +19,16 @@ buildPythonApplication rec {
     sha256 = "1g73sc10rn0lpw6bdr4z2qr1izw4ck2vmfkwhvqh23wqv91jsw39";
   };
 
-  nativeBuildInputs = [ cmake ];
-  buildInputs = [ zlib makeWrapper ];
+  nativeBuildInputs = [ cmake bash ];
+  buildInputs = [ zlib ];
   propagatedBuildInputs = [ numpy cython ];
+
+  # The build directory seems to already have been created by nix
+  # removing this lines, avoids a warning
+  prePatch = ''
+    substituteInPlace INSTALL.sh \
+      --replace "mkdir build" "#!${bash}/bin/bash"
+  '';
 
   buildPhase = ''
     cd ../
@@ -31,6 +38,7 @@ buildPythonApplication rec {
 
   # No tests available
   checkPhase = false;
+
   # This is called even if checkPhase is false
   dontUsePipInstall = true;
 
@@ -38,6 +46,7 @@ buildPythonApplication rec {
     cd ../
 
     mkdir -p $out/bin/bin
+    mkdir -p $out/lib
 
     mv ./src $out/bin/
     mv ./lib $out/bin/
@@ -46,16 +55,18 @@ buildPythonApplication rec {
     install -Dm555 ./bin/TIDDIT $out/bin/bin/TIDDIT
 
     BAMTOOLS="./build/lib/bamtools/src/api"
-    cp $BAMTOOLS/libbamtools.a $out/lib 
-    cp $BAMTOOLS/libbamtools.so  $out/lib 
+    cp $BAMTOOLS/libbamtools.a $out/lib
+    cp $BAMTOOLS/libbamtools.so  $out/lib
     cp $BAMTOOLS/libbamtools.so.2.3.0 $out/lib
-
-    #wrapProgram $out/bin/bin/TIDDIT --prefix LD_LIBRARY_PATH: $out/lib
   '';
 
   # Other way to override?
   setuptoolsCheckPhase = ''
     echo "No tests available"
+  '';
+
+  postInstall = ''
+    rm -rf $out/bin/src/build
   '';
 
   meta = with lib; {
