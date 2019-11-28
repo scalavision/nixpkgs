@@ -23635,27 +23635,29 @@ in
   samtools_0_1_19 = callPackage ../applications/science/biology/samtools/samtools_0_1_19.nix {
     stdenv = gccStdenv;
   };
+  
+  seaview = callPackage ../applications/science/biology/seaview { };
 
   snpeff = callPackage ../applications/science/biology/snpeff { };
 
   somatic-sniper = callPackage ../applications/science/biology/somatic-sniper { };
 
   sortmerna = callPackage ../applications/science/biology/sortmerna { };
+  
+  SPAdes = callPackage ../applications/science/biology/spades { };
 
   stacks = callPackage ../applications/science/biology/stacks { };
 
   star = callPackage ../applications/science/biology/star { };
 
   strelka = callPackage ../applications/science/biology/strelka { };
-
+  
   inherit (callPackages ../applications/science/biology/sumatools {})
       sumalibs
       sumaclust
       sumatra;
-
-  seaview = callPackage ../applications/science/biology/seaview { };
-
-  SPAdes = callPackage ../applications/science/biology/spades { };
+  
+  svdb = ../applications/science/biology/svdb { };
 
   trimal = callPackage ../applications/science/biology/trimal { };
 
