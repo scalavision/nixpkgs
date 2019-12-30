@@ -2,11 +2,11 @@
 , fetchFromGitHub
 , cmake
 , zlib
-, python
+, python36
 , bash
 }:
 
-with python.pkgs;
+with python36.pkgs;
 buildPythonApplication rec {
 
   pname = "TIDDIT";
@@ -24,7 +24,7 @@ buildPythonApplication rec {
   propagatedBuildInputs = [ numpy cython ];
 
   # The build directory seems to already have been created by nix
-  # removing this lines, avoids a warning
+  # overwriting this line with the path to bash.
   prePatch = ''
     substituteInPlace INSTALL.sh \
       --replace "mkdir build" "#!${bash}/bin/bash"
