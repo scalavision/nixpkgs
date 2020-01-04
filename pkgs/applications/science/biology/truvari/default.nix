@@ -5,7 +5,7 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "truvari";
-  version = "1.3.2";
+  version = "1.3.4";
 
   src = fetchFromGitHub {
     owner = "spiralgenetics";
