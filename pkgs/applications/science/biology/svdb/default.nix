@@ -15,6 +15,9 @@ buildPythonApplication rec {
     sha256 = "1591z673g0h4z5dqk8xi5kbs2wc0bvrng30admw2z60wrcj9dxns";
   };
 
+  patches = [ ./0001-set-language-version.patch ];
+
+  buildInputs = [ cython ];
   propagatedBuildInputs = [ numpy ];
 
   meta = with lib; {

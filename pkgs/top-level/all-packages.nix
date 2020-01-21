@@ -23657,7 +23657,7 @@ in
       sumaclust
       sumatra;
   
-  svdb = ../applications/science/biology/svdb { };
+  svdb = callPackage ../applications/science/biology/svdb { };
 
   trimal = callPackage ../applications/science/biology/trimal { };
 

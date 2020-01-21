@@ -1,0 +1,21 @@
+diff --git a/setup.py b/setup.py
+index 4e2f37e..4cb8cdf 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1,4 +1,5 @@
+ from setuptools import setup
++import sys
+ 
+ try:
+     from Cython.Build import cythonize
+@@ -14,7 +15,9 @@ if has_cython:
+         "svdb/readVCF.py",
+         "svdb/merge_vcf_module_cython.py",
+         "svdb/query_module.py",
+-        "svdb/export_module.py"])
++        "svdb/export_module.py"],
++        compiler_directives={'language_level' : sys.version_info[0]}
++    )
+ else:
+     ext_modules = []
+ 
