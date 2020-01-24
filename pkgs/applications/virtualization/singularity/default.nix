@@ -15,7 +15,7 @@ with lib;
 
 buildGoPackage rec {
   pname = "singularity";
-  version = "3.2.1";
+  version = "3.5.2";
 
   src = fetchFromGitHub {
     owner = "sylabs";
