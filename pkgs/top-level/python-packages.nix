@@ -1494,7 +1494,7 @@ in {
   webapp2 = callPackage ../development/python-modules/webapp2 { };
 
   wordcloud = callPackage ../development/python-modules/wordcloud { };
-  
+
   wrf-python = callPackage ../development/python-modules/wrf-python { };
 
   pyunbound = callPackage ../tools/networking/unbound/python.nix { };
@@ -1688,7 +1688,7 @@ in {
 
   asn1ate = callPackage ../development/python-modules/asn1ate { };
 
-  atlassian-python-api = callPackage ../development/python-modules/atlassian-python-api { };  
+  atlassian-python-api = callPackage ../development/python-modules/atlassian-python-api { };
 
   atomiclong = callPackage ../development/python-modules/atomiclong { };
 
@@ -4396,7 +4396,7 @@ in {
 
   nbconvert = callPackage ../development/python-modules/nbconvert { };
 
-  nbformat = if isPy3k then 
+  nbformat = if isPy3k then
     callPackage ../development/python-modules/nbformat { }
   else callPackage ../development/python-modules/nbformat/2.nix { };
 
@@ -4871,7 +4871,7 @@ in {
 
   pyaudio = callPackage ../development/python-modules/pyaudio { };
 
-  pysam = callPackage ../development/python-modules/pysam { };
+  pysam = callPackage ../development/python-modules/pysam { samtools = pkgs.samtools_19; };
 
   pysaml2 = callPackage ../development/python-modules/pysaml2 {
     inherit (pkgs) xmlsec;

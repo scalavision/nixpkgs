@@ -15388,7 +15388,7 @@ in
   miniHttpd = callPackage ../servers/http/mini-httpd {};
 
   mlflow-server = callPackage ../servers/mlflow-server { };
-  
+
   mlmmj = callPackage ../servers/mail/mlmmj { };
 
   moodle = callPackage ../servers/web-apps/moodle { };
@@ -23882,7 +23882,10 @@ in
 
   hisat2 = callPackage ../applications/science/biology/hisat2 { };
 
-  htslib = callPackage ../development/libraries/science/biology/htslib { };
+  htslib_1102 = callPackage ../development/libraries/science/biology/htslib/1.10.2.nix { };
+  htslib_19 = callPackage ../development/libraries/science/biology/htslib/1.9.nix { };
+  htslib = htslib_1102;
+
 
   igv = callPackage ../applications/science/biology/igv { };
 
@@ -23970,10 +23973,12 @@ in
     mpi = true;
   });
 
-  samtools = callPackage ../applications/science/biology/samtools { };
+  samtools_110 = callPackage ../applications/science/biology/samtools/1.10.nix { };
+  samtools_19 = callPackage ../applications/science/biology/samtools/1.9.nix { htslib = htslib_19; };
   samtools_0_1_19 = callPackage ../applications/science/biology/samtools/samtools_0_1_19.nix {
     stdenv = gccStdenv;
   };
+  samtools = samtools_110;
 
   snpeff = callPackage ../applications/science/biology/snpeff { };
 

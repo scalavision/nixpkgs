@@ -1,12 +1,11 @@
-{ stdenv, fetchurl, zlib, htslib, perl, ncurses ? null }:
+{ stdenv, fetchurl, zlib, htslib, perl, ncurses ? null, version, sha256, ... }:
 
 stdenv.mkDerivation rec {
   pname = "samtools";
-  version = "1.10";
-
+  inherit version;
   src = fetchurl {
     url = "https://github.com/samtools/samtools/releases/download/${version}/${pname}-${version}.tar.bz2";
-    sha256 = "119ms0dpydw8dkh3zc4yyw9zhdzgv12px4l2kayigv31bpqcb7kv";
+    inherit sha256;
   };
 
   nativeBuildInputs = [ perl ];

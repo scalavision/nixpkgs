@@ -1,12 +1,10 @@
-{ stdenv, fetchurl, zlib, bzip2, lzma, curl, perl }:
-
+{ stdenv, fetchurl, zlib, bzip2, lzma, curl, perl, version, sha256, ... }:
 stdenv.mkDerivation rec {
   pname = "htslib";
-  version = "1.10.2";
-
+  inherit version;
   src = fetchurl {
     url = "https://github.com/samtools/htslib/releases/download/${version}/${pname}-${version}.tar.bz2";
-    sha256 = "0f8rglbvf4aaw41i2sxlpq7pvhly93sjqiz0l4q3hwki5zg47dg3";
+    inherit sha256;
   };
 
   # perl is only used during the check phase.
