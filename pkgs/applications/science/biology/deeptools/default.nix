@@ -4,11 +4,11 @@
 with python.pkgs;
 buildPythonApplication rec {
   pname = "deepTools";
-  version = "3.3.1";
+  version = "3.3.2";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "08p36p9ncj5s8qf1r7h83x4rnmi63l3yk6mnr3wgpg2qgvwl0hji";
+    sha256 = "1zpc5qg8m8hsaaqqqcb2gpswq7j6g75b8q4gi9q1zz55w54hbjy3";
   };
 
   propagatedBuildInputs = [
