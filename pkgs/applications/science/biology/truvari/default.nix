@@ -5,7 +5,7 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "truvari";
-  version = "1.3.2";
+  version = "1.3.4";
 
   src = fetchFromGitHub {
     owner = "spiralgenetics";
@@ -26,7 +26,8 @@ python3Packages.buildPythonApplication rec {
   prePatch = ''
     substituteInPlace ./setup.py \
       --replace '"progressbar2==3.41.0",' "" \
-      --replace '"pysam==0.15.2",' ""
+      --replace '"pysam==0.15.2",' "" \
+      --replace '"pyfaidx==0.5.5.2",' "" \
   '';
 
   meta = with lib; {
