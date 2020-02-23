@@ -1,21 +1,25 @@
-{ fetchurl, stdenv, fetchFromGitHub, makeWrapper, zlib, perl, perlPackages, curl, which, unzip }:
+{  stdenv
+, fetchFromGitHub
+, makeWrapper
+, zlib
+, perl
+, perlPackages
+, curl
+, which
+, unzip 
+}:
 
 let 
 
-    version = "98.3";
+    version = "99.1";
 
-    src = fetchurl {
-      url = "https://github.com/Ensembl/ensembl-vep/archive/release/98.3.tar.gz";
-      sha256 = "1msb8yrglpa32da9h7ik3fwmw5v9fz6j374h01gx6dqw0xhqv1zg";
-    };
-    /*
+   # https://github.com/Ensembl/ensembl-vep/archive/release/99.1.tar.gz
     src = fetchFromGitHub {
-        owner = "Ensembl";
-        repo = "ensempl-vep";
-        rev = "release/${version}";
-        sha256 = "0nm1227f025f5wdi58ny2nxhjfrl0n2zq2qys91p96bxszwcc934";
-        };
-        */
+      owner = "Ensembl";
+      repo = "ensembl-vep";
+      rev = "release/${version}";
+      sha256 = "1jajxdbmjv0nrim54p28mm6cpsr0c8wnc2adzgn2413qk36dsll1";
+    };
 
     deps = stdenv.mkDerivation {
         

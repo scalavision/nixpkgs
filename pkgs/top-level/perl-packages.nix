@@ -829,6 +829,21 @@ let
     propagatedBuildInputs = [ MathBigInt ];
   };
 
+  BioPerl = buildPerlPackage rec {
+    name = "BioPerl-1.7.7";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/C/CJ/CJFIELDS/${name}.tar.gz";
+      sha256 = "730e2bd38b7550bf6bbd5bca50d019a70cca514559702c1389d770ff69cff1bb";
+    };
+    buildInputs = [ TestMemoryCycle TestWeaken ];
+    propagatedBuildInputs = [ DBFile DataStag Error Graph HTTPMessage IOString IOStringy IPCRun LWP ListMoreUtils ModuleBuild SetScalar TestMost TestRequiresInternet URI XMLDOM XMLDOMXPath XMLLibXML XMLSAX XMLSAXBase XMLSAXWriter XMLTwig XMLWriter YAML libxml_perl ];
+    meta = {
+      homepage = https://metacpan.org/release/BioPerl;
+      description = "Perl modules for biology";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
   BitVector = buildPerlPackage {
     name = "Bit-Vector-7.4";
     src = fetchurl {
@@ -3607,6 +3622,20 @@ let
     };
   };
 
+  DataStag = buildPerlPackage rec {
+    name = "Data-Stag-0.14";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/C/CM/CMUNGALL/${name}.tar.gz";
+      sha256 = "4ab122508d2fb86d171a15f4006e5cf896d5facfa65219c0b243a89906258e59";
+    };
+    propagatedBuildInputs = [ IOString ];
+    meta = {
+      description = "Structured Tags";
+      # no license given at: http://stag.sourceforge.net/
+      license = "unknown";
+    };
+  };
+
   DataValidateURI = buildPerlPackage rec {
     name = "Data-Validate-URI-0.07";
     src = fetchurl {
@@ -4099,6 +4128,8 @@ let
   DBDsybase = callPackage ../development/perl-modules/DBD-sybase { };
 
   DBFile = callPackage ../development/perl-modules/DB_File { };
+
+  ensembl-vep = callPackage ../development/perl-modules/ensembl-vep { };
 
   DBI = buildPerlPackage rec {
     name = "DBI-${version}";
@@ -16259,6 +16290,18 @@ let
     };
   };
 
+  TestWeaken = buildPerlPackage rec {
+    name = "Test-Weaken-3.022000";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/K/KR/KRYDE/${name}.tar.gz";
+      sha256 = "2631a87121310262e0e96107a6fa0ed69487b7701520773bee5fa9accc295f5b";
+    };
+    meta = {
+      description = "Test that freed memory objects were, indeed, freed";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
   TestWithoutModule = buildPerlPackage {
     name = "Test-Without-Module-0.20";
     src = fetchurl {
@@ -17744,6 +17787,24 @@ let
       sha256 = "0phpkc4li43m2g44hdcvyxzy9pymqwlqhh5hwp2xc0cv8l5lp8lb";
     };
     propagatedBuildInputs = [ XMLRegExp libxml_perl ];
+  };
+
+  XMLDOMXPath = buildPerlPackage rec {
+    name = "XML-DOM-XPath-0.14";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/M/MI/MIROD/${name}.tar.gz";
+      sha256 = "0173a74a515211997a3117a47e7b9ea43594a04b865b69da5a71c0886fa829ea";
+    };
+    propagatedBuildInputs = [ XMLDOM XMLXPathEngine ];
+    prePatch = ''
+      substituteInPlace t/test_non_ascii.t \
+        --replace "use encoding 'utf8'" "use utf8"
+    '';
+    meta = {
+      description = "Perl extension to add XPath support to XML::DOM, using XML::XPath engine";
+      # no license given at: https://github.com/gitpan/XML-DOM-XPath
+      license = "unknown";
+    };
   };
 
   XMLFeedPP = buildPerlPackage rec {
