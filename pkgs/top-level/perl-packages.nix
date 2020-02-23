@@ -830,11 +830,17 @@ let
   };
 
   BioPerl = buildPerlPackage rec {
-    name = "BioPerl-1.7.7";
-    src = fetchurl {
-      url = "mirror://cpan/authors/id/C/CJ/CJFIELDS/${name}.tar.gz";
-      sha256 = "730e2bd38b7550bf6bbd5bca50d019a70cca514559702c1389d770ff69cff1bb";
+    name = "bioperl";
+#    https://github.com/bioperl/bioperl-live/releases/tag/release-1-6-924
+    src = fetchFromGitHub {
+      owner = "bioperl";
+      repo = "bioperl-live";
+      rev = "release-1-6-924";
+      sha256 = "13lml8wcik0h9ys7d8dd3cnaj2593d2cm6n4951wrzrljq67pag3";
     };
+    prePatch = ''
+    mv Build.PL Makefile.PL
+    '';
     buildInputs = [ TestMemoryCycle TestWeaken ];
     propagatedBuildInputs = [ DBFile DataStag Error Graph HTTPMessage IOString IOStringy IPCRun LWP ListMoreUtils ModuleBuild SetScalar TestMost TestRequiresInternet URI XMLDOM XMLDOMXPath XMLLibXML XMLSAX XMLSAXBase XMLSAXWriter XMLTwig XMLWriter YAML libxml_perl ];
     meta = {
