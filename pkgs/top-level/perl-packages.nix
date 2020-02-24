@@ -842,10 +842,174 @@ let
     mv Build.PL Makefile.PL
     '';
     buildInputs = [ TestMemoryCycle TestWeaken ];
-    propagatedBuildInputs = [ DBFile DataStag Error Graph HTTPMessage IOString IOStringy IPCRun LWP ListMoreUtils ModuleBuild SetScalar TestMost TestRequiresInternet URI XMLDOM XMLDOMXPath XMLLibXML XMLSAX XMLSAXBase XMLSAXWriter XMLTwig XMLWriter YAML libxml_perl ];
+    propagatedBuildInputs = [ 
+      DBFile 
+      DataStag 
+      Error 
+      Graph 
+      HTTPMessage 
+      IOString 
+      IOStringy 
+      IPCRun 
+      LWP
+      ListMoreUtils
+      ModuleBuild
+      SetScalar
+      TestMost
+      TestRequiresInternet
+      URI
+      XMLDOM
+      XMLDOMXPath
+      XMLLibXML
+      XMLSAX
+      XMLSAXBase
+      XMLSAXWriter
+      XMLTwig 
+      XMLWriter
+      YAML
+      libxml_perl 
+      SVG
+      SVGGraph
+      AlgorithmMunkres
+      ArrayCompare
+      Clone
+      GD
+      HTMLTableExtract
+      PostScript      
+      GraphViz
+      SortNaturally
+      SpreadsheetParseExcel
+      XMLSimple
+      SOAPLite
+      ConvertBinaryC
+      BioPhylo
+    ];
     meta = {
       homepage = https://metacpan.org/release/BioPerl;
       description = "Perl modules for biology";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  PostScript = buildPerlPackage rec {
+    name = "PostScript-0.06";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/S/SH/SHAWNPW/${name}.tar.gz";
+      sha256 = "64aa477ebf153710e4cd1251a0fa6f964ac34fcd3d9993e299e28064f9eec589";
+    };
+    meta = {
+    };
+  };
+
+   AlgorithmMunkres = buildPerlPackage rec {
+    name = "Algorithm-Munkres-0.08";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/T/TP/TPEDERSE/${name}.tar.gz";
+      sha256 = "196bcda3984b179cedd847a7c16666b4f9741c07f611a65490d9e7f4b7a55626";
+    };
+    meta = {
+      description = "Munkres.pm";
+      license = "unknown";
+    };
+  };
+
+   SVG = buildPerlPackage rec {
+    name = "SVG-2.84";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/M/MA/MANWAR/${name}.tar.gz";
+      sha256 = "ec3d6ddde7a46fa507eaa616b94d217296fdc0d8fbf88741367a9821206f28af";
+    };
+    meta = {
+      description = "Perl extension for generating Scalable Vector Graphics (SVG) documents";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+   ConvertBinaryC = buildPerlPackage rec {
+    name = "Convert-Binary-C-0.78";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/M/MH/MHX/${name}.tar.gz";
+      sha256 = "24008c3f89117005d308bb2fd2317db6d086a265be6e98855109bbc12a52f2ea";
+    };
+    meta = {
+      homepage = http://search.cpan.org/~mhx/Convert-Binary-C/;
+      description = "Binary Data Conversion using C Types";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+   SVGGraph = buildPerlPackage rec {
+    name = "SVG-Graph-0.02";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/A/AL/ALLENDAY/${name}.tar.gz";
+      sha256 = "0de0dfd6c2c6a5fa952e9cc5f56077851fcaea338e1d13915458b351b37061bc";
+    };
+    propagatedBuildInputs = [ MathDerivative MathSpline SVG StatisticsDescriptive TreeDAG_Node ];
+    meta = {
+      license = "unknown";
+    };
+  };
+
+  MathDerivative = buildPerlPackage rec {
+    name = "Math-Derivative-1.01";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/J/JG/JGAMBLE/${name}.tar.gz";
+      sha256 = "14c0b3fa05dcb74a44a9de6b4b08c3e58e672826b5f8e47535325b64f6ee69e6";
+    };
+    buildInputs = [ MathUtils ModuleBuild ];
+    meta = {
+      description = "Numeric 1st and 2nd order differentiation";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+   MathSpline = buildPerlPackage rec {
+    name = "Math-Spline-0.02";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/C/CH/CHORNY/${name}.tar.gz";
+      sha256 = "cfd7044483f34e6fa64080bf7c4bc10ff6173410c350066fe65e090c3b81b6e9";
+    };
+    propagatedBuildInputs = [ MathDerivative ];
+    meta = {
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+   TreeDAG_Node = buildPerlPackage rec {
+    name = "Tree-DAG_Node-1.31";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/R/RS/RSAVAGE/${name}.tgz";
+      sha256 = "1c8ba69772568b3758054247097512c550efe31517c329fb65eef7afccc9d304";
+    };
+    propagatedBuildInputs = [ FileSlurpTiny perl ];
+    meta = {
+      description = "An N-ary tree";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+   MathUtils = buildPerlPackage rec {
+    name = "Math-Utils-1.13";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/J/JG/JGAMBLE/${name}.tar.gz";
+      sha256 = "0a01dc124f1e7dcadb4c5353ce52a68c7b82d741d4afc2b46a205422d2e37f08";
+    };
+    buildInputs = [ ModuleBuild ];
+    meta = {
+      description = "Useful mathematical functions not in Perl";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+   BioPhylo = buildPerlPackage rec {
+    name = "Bio-Phylo-v2.0.1";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/R/RV/RVOSA/${name}.tar.gz";
+      sha256 = "30bf253800a12ac501222ea42d17612f0557af6329daf05465b538569a894f4d";
+    };
+    meta = {
+      homepage = http://biophylo.blogspot.com/;
+      description = "An object-oriented Perl toolkit for analyzing and manipulating phyloinformatic data";
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
     };
   };
