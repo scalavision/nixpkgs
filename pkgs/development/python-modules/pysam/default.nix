@@ -26,6 +26,8 @@ buildPythonPackage rec {
     sha256 = "0g6md20gsr24pdr9b8nj403w31ixfjv8bjhdvg3x476kjiq1kvyb";
   };
 
+  patches = [ ./0001-changes.patch ];
+
   buildInputs = [ bzip2 curl cython lzma zlib ];
 
   checkInputs = [ pytest bcftools htslib samtools ];
