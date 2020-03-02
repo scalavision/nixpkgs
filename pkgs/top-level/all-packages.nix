@@ -24021,6 +24021,8 @@ in
 
   kallisto = callPackage ../applications/science/biology/kallisto { };
 
+  kent = callPackage ../applications/science/biology/kent { };
+
   kssd = callPackage ../applications/science/biology/kssd { };
 
   last = callPackage ../applications/science/biology/last { };
