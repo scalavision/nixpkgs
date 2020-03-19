@@ -9,14 +9,14 @@ let
 in
 stdenv.mkDerivation rec {
 
-  name = "gatk3";
+  pname = "gatk3";
   version = "3.8-1-0";
 
   src = let
     qstring = "package=GATK-archive&version=${version}-${gatkHash}";
   in fetchurl {
     url = "https://software.broadinstitute.org/gatk/download/auth?${qstring}";
-    name = "${name}.tar.bz2";
+    name = "${pname}.tar.bz2";
     sha256 = "0p5yikcl54j7krp0sh6vw0wg4zs2a2dlllivpnzkxjnhs8s9b0m0";    
   };
 
