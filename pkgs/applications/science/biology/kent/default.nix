@@ -48,21 +48,21 @@ stdenv.mkDerivation rec {
     mkdir -p $NIX_BUILD_TOP/bin/x86_64
     
     make libs
-    cd jkOwnLib
-    make
+    # cd jkOwnLib
+    # make
 
-    cp ../lib/x86_64/jkOwnLib.a $NIX_BUILD_TOP/lib
-    cp ../lib/x86_64/jkweb.a $NIX_BUILD_TOP/lib
+    # cp ../lib/x86_64/jkOwnLib.a $NIX_BUILD_TOP/lib
+    # cp ../lib/x86_64/jkweb.a $NIX_BUILD_TOP/lib
 
-    cd ../utils
+    cd utils
     make
   '';
 
   installPhase = ''
     mkdir -p $out/bin
     mkdir -p $out/lib
-    cp $NIX_BUILD_TOP/lib/jkOwnLib.a $out/lib
-    cp $NIX_BUILD_TOP/lib/jkweb.a $out/lib
+    # cp $NIX_BUILD_TOP/lib/jkOwnLib.a $out/lib
+    # cp $NIX_BUILD_TOP/lib/jkweb.a $out/lib
     cp $NIX_BUILD_TOP/bin/x86_64/* $out/bin
   ''; 
 
