@@ -5065,6 +5065,8 @@ in {
 
   pyaudio = callPackage ../development/python-modules/pyaudio { };
 
+  pybedtools = callPackage ../development/python-modules/pybedtools { };
+
   pysam = callPackage ../development/python-modules/pysam { };
 
   pysaml2 = callPackage ../development/python-modules/pysaml2 {

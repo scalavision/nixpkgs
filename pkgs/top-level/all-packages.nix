@@ -24359,6 +24359,8 @@ in
 
   htslib = callPackage ../development/libraries/science/biology/htslib { };
 
+  intervene = callPackage ../applications/science/biology/intervene { };
+
   igv = callPackage ../applications/science/biology/igv { };
 
   inormalize = callPackage ../applications/science/biology/inormalize { };
