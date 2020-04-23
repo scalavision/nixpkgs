@@ -1,8 +1,8 @@
 { lib
 , fetchFromGitHub
-, python3
+, python36
 }:
-with python3.pkgs;
+with python36.pkgs;
 buildPythonApplication rec {
 
   pname = "svdb";
