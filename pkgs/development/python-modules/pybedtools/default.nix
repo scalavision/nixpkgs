@@ -27,12 +27,6 @@ buildPythonPackage rec {
 
   buildInputs = [ zlib bzip2 lzma cython ];
 
-  /*
-  preConfigure = ''
-    python setup.py cythonise
-  '';
-  */
-
   propagatedBuildInputs = [ pysam ];
 
   checkInputs = [ pytest pyyaml pathlib psutil ];

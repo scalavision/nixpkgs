@@ -1,11 +1,11 @@
 { lib
 , fetchFromBitbucket
-, python36
+, python
 , bedtools
 , rPackages
 , R
 }:
-with python36.pkgs;
+with python.pkgs;
 buildPythonApplication rec {
 
   pname = "intervene";
@@ -15,7 +15,7 @@ buildPythonApplication rec {
     owner = "CBGR";
     repo = "intervene";
     rev = "master";
-    sha256 = "14nnsf755klzbhrgvah1v62bxigw92jgb7yqk9bml7f4naxvvrzh";
+    sha256 = "1fg9jw25fn35flyvv2bv3isby2nj9pcka36i7l4a1h3g6yvdw4qv";
   };
 
 #  buildInputs = [ bedtools ];
