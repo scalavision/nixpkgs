@@ -1,18 +1,18 @@
 { lib
 , fetchFromGitHub
-, python36
+, python3
 }:
-with python36.pkgs;
+with python3.pkgs;
 buildPythonApplication rec {
 
   pname = "svdb";
-  version = "2.1.1";
+  version = "2.3.0";
 
   src = fetchFromGitHub {
     owner = "J35P312";
     repo = "SVDB";
     rev = version;
-    sha256 = "1591z673g0h4z5dqk8xi5kbs2wc0bvrng30admw2z60wrcj9dxns";
+    sha256 = "14nnsf755klzbhrgvah1v62bxigw92jgb7yqk9bml7f4naxvvrzi";
   };
 
   patches = [ ./0001-set-language-version.patch ];
