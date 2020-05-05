@@ -6,13 +6,13 @@ with python3.pkgs;
 buildPythonApplication rec {
 
   pname = "svdb";
-  version = "2.3.0";
+  version = "2.4.0";
 
   src = fetchFromGitHub {
     owner = "J35P312";
     repo = "SVDB";
     rev = version;
-    sha256 = "14nnsf755klzbhrgvah1v62bxigw92jgb7yqk9bml7f4naxvvrzi";
+    sha256 = "1j7sks7l16g1flf8870qbfa8fwnf4184b721z09kafqw2jb3n4pn";
   };
 
   patches = [ ./0001-set-language-version.patch ];
