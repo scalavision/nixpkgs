@@ -24445,6 +24445,8 @@ in
 
   svaba = callPackage ../applications/science/biology/svaba { };
 
+  svtyper = callPackage ../applications/science/biology/svtyper { };
+
   tebreak = callPackage ../applications/science/biology/tebreak { };
 
   trimal = callPackage ../applications/science/biology/trimal { };
