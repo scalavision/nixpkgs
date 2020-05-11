@@ -10,13 +10,13 @@ with python36.pkgs;
 buildPythonApplication rec {
 
   pname = "TIDDIT";
-  version = "2.8.1";
+  version = "2.11.0";
 
   src = fetchFromGitHub {
     owner = "SciLifeLab";
     repo = "${pname}";
     rev = "${pname}-${version}";
-    sha256 = "1g73sc10rn0lpw6bdr4z2qr1izw4ck2vmfkwhvqh23wqv91jsw39";
+    sha256 = "17lx6hw9imflqay93nkzc2fgzfkqpskpkqiy7yhybg4l47ixpkkg";
   };
 
   nativeBuildInputs = [ cmake bash ];
