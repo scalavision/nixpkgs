@@ -24317,6 +24317,8 @@ in
   delly = callPackage ../applications/science/biology/delly { };
 
   diamond = callPackage ../applications/science/biology/diamond { };
+  
+  duphold  = callPackage ../applications/science/biology/duphold { };
 
   ecopcr = callPackage ../applications/science/biology/ecopcr { };
 
@@ -24345,6 +24347,8 @@ in
   };
 
   kallisto = callPackage ../applications/science/biology/kallisto { };
+  
+  kexpr-nim = callPackage ../applications/science/biology/kexpr-nim { };
 
   kssd = callPackage ../applications/science/biology/kssd { };
 
