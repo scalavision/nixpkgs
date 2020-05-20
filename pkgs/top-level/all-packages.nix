@@ -24573,6 +24573,8 @@ in
   hmmer = callPackage ../applications/science/biology/hmmer { };
 
   bwa = callPackage ../applications/science/biology/bwa { };
+  
+  snap = callPackage ../applications/science/biology/snap { };
 
   ### SCIENCE/MACHINE LEARNING
 
