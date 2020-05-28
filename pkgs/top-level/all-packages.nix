@@ -25227,6 +25227,8 @@ in
 
   yacas = callPackage ../applications/science/math/yacas { };
 
+  yeppp = callPackage ../applications/science/math/yeppp { };
+
   speedcrunch = libsForQt5.callPackage ../applications/science/math/speedcrunch { };
 
   ### SCIENCE / MISC
