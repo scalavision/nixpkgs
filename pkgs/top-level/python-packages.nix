@@ -6757,7 +6757,7 @@ in {
  
   # sqlalchemy-searchable = disabledIf (!isPy3k) (callPackage ../development/python-modules/sqlalchemy-searchable { });
 
-  sqlalchemy-searchable = callPackage ../development/python-modules/sqlalchemy-searchable { python = pkgs.python3; };
+  sqlalchemy-searchable = callPackage ../development/python-modules/sqlalchemy-searchable { };
 
   sqlalchemy-utils = callPackage ../development/python-modules/sqlalchemy-utils { };
 

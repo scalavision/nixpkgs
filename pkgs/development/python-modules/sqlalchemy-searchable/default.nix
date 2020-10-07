@@ -1,13 +1,13 @@
 { lib
-, buildPythonPackage
 , fetchPypi
 , sqlalchemy
 , sqlalchemy-utils
 , validators
-, python
+, python3
 , python3Packages
 }:
-buildPythonPackage rec {
+with python3.pkgs;
+python3Packages.buildPythonPackage rec {
 
   pname = "SQLAlchemy-Searchable";
   version = "1.2.0";
@@ -17,8 +17,8 @@ buildPythonPackage rec {
     sha256 = "0zgpfnyicp5blx05rwh3jr0yf8p4vqm8kgp77f5hm2kf6p8yjzar";
   };
 
-  propagatedBuildInputs = [
-    sqlalchemy sqlalchemy-utils python3Packages.validators
+  propagatedBuildInputs = with python3Packages; [
+    python3Packages.sqlalchemy python3Packages.sqlalchemy-utils python3Packages.validators
   ];
   
   checkInputs = with python3Packages; [
@@ -29,12 +29,14 @@ buildPythonPackage rec {
     isort
   ];
 
+  /*
   checkPhase = ''
     pytest tests
   '';
+  */
   
   # tests are not packaged in pypi tarball
-  # doCheck = false;
+  doCheck = false;
 
   # pythonImportsCheck = [ "citext" ];
 
