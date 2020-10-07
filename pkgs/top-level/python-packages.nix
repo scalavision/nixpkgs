@@ -6752,6 +6752,13 @@ in {
 
   sqlalchemy_migrate = callPackage ../development/python-modules/sqlalchemy-migrate { };
 
+
+ #   openwrt-luci-rpc = disabledIf (!isPy3k) (callPackage ../development/python-modules/openwrt-luci-rpc { });
+ 
+  # sqlalchemy-searchable = disabledIf (!isPy3k) (callPackage ../development/python-modules/sqlalchemy-searchable { });
+
+  sqlalchemy-searchable = callPackage ../development/python-modules/sqlalchemy-searchable { python = pkgs.python3; };
+
   sqlalchemy-utils = callPackage ../development/python-modules/sqlalchemy-utils { };
 
   sqlite3dbm = callPackage ../development/python-modules/sqlite3dbm { };
