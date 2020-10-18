@@ -2,10 +2,10 @@
 , numpy
 , openjdk
 , fetchFromGitHub
-, python3
+, buildPythonPackage
+, pkgs
 }: 
-
-python3.pkgs.buildPythonPackage rec {
+pkgs.python3Packages.buildPythonPackage rec {
   pname = "jep";
   version = "3.9.1";
   src = fetchFromGitHub {
