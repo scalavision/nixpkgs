@@ -21,7 +21,8 @@ pkgs.python3Packages.buildPythonPackage rec {
   buildInputs = [ openjdk makeWrapper ];
 
   checkInputs = [ numpy ];
-  
+
+  /* 
   postInstall = ''
     rm $out/bin/jep
     cat << EOF > $out/bin/jep
@@ -31,5 +32,12 @@ pkgs.python3Packages.buildPythonPackage rec {
     EOF
 #    chmod +x $out/bin/jep
   '';
+  */
 
+  postInstall = ''
+    mv $out/bin/jep $out/bin/.jep-wrapped
+    makeWrapper $out/bin/.jep-wrapped "$out/bin/jep" \
+      --prefix PATH : "${openjdk}/bin" \
+      --set JAVA_HOME "${openjdk}"
+  '';
 }
