@@ -4,6 +4,7 @@
 , fetchFromGitHub
 , buildPythonPackage
 , pkgs
+, makeWrapper
 }: 
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "jep";
@@ -17,28 +18,18 @@ pkgs.python3Packages.buildPythonPackage rec {
 
   propagatedBuildInputs = [ numpy ];
 
-  buildInputs = [ openjdk ];
+  buildInputs = [ openjdk makeWrapper ];
 
   checkInputs = [ numpy ];
-
-  /*
-  installPhase = ''
-    ls -halt .
-    ls -halt ./dist
-    ls -halt ./build
-
-    mkdir -p $out/bin/scripts-3.8
-    mv ./build/scripts-3.8/jep $out/bin
-    
-    mkdir -p $out/include
-    mv ./build/include/*.h $out/include
-
-    mkdir -p $out/lib
-    mv ./build/lib.linux-x86_64-3.8/* $out/lib
-
-    mkdir -p $out/java
-    mv ./build/java/jep-${version}.jar $out/java
+  
+  postInstall = ''
+    rm $out/bin/jep
+    cat << EOF > $out/bin/jep
+    export PYTHONPATH="$PYTHONPATH":$out/lib/python3.8/site-packages
+    java -Djava.library.path=$out/lib/python3.8/site-packages/jep \
+      -cp $out/lib/python3.8/site-packages/jep/jep-3.9.1.jar jep.Run "$${@}"
+    EOF
+#    chmod +x $out/bin/jep
   '';
-  */
 
 }
