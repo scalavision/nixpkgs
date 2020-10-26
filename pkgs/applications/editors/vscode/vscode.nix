@@ -11,8 +11,8 @@ let
   archive_fmt = if system == "x86_64-darwin" then "zip" else "tar.gz";
 
   sha256 = {
-    x86_64-linux = "103p0daf13zsqz2481pw6zpr6n0vaf57dq89i4djcm449i9c959i";
-    x86_64-darwin = "0bxggvi0wzsy801iylszqp8rv6kij6j2v05b6qyf6af7j3cmd1qf";
+    x86_64-linux = "0mpb4641icr3z89y2rlh5anli40p1f48sl5xagr7h3nb5c84k10x";
+    x86_64-darwin = "1azmc79zf72007qc1xndp9wdkd078mvqgv35hf231q7kdi6wzxcp";
   }.${system};
 in
   callPackage ./generic.nix rec {
@@ -21,7 +21,7 @@ in
 
     # Please backport all compatible updates to the stable release.
     # This is important for the extension ecosystem.
-    version = "1.49.3";
+    version = "1.50.1";
     pname = "vscode";
 
     executableName = "code" + lib.optionalString isInsiders "-insiders";

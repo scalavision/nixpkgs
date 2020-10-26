@@ -106,7 +106,7 @@ let
                 name = "php-with-extensions-${version}";
                 inherit (php) version;
                 nativeBuildInputs = [ makeWrapper ];
-                passthru = {
+                passthru = php.passthru // {
                   buildEnv = mkBuildEnv allArgs allExtensionFunctions;
                   withExtensions = mkWithExtensions allArgs allExtensionFunctions;
                   phpIni = "${phpWithExtensions}/lib/php.ini";
@@ -177,7 +177,7 @@ let
             ++ lib.optional (!cgiSupport) "--disable-cgi"
             ++ lib.optional (!cliSupport) "--disable-cli"
             ++ lib.optional fpmSupport    "--enable-fpm"
-            ++ lib.optional pearSupport [ "--with-pear=$(out)/lib/php/pear" "--enable-xml" "--with-libxml" ]
+            ++ lib.optional pearSupport [ "--with-pear" "--enable-xml" "--with-libxml" ]
             ++ lib.optionals (pearSupport && (lib.versionOlder version "7.4")) [
               "--enable-libxml"
               "--with-libxml-dir=${libxml2.dev}"
@@ -259,6 +259,7 @@ let
           passthru = {
             buildEnv = mkBuildEnv {} [];
             withExtensions = mkWithExtensions {} [];
+            inherit ztsSupport;
           };
 
           meta = with stdenv.lib; {

@@ -2,22 +2,24 @@
 , buildGoPackage
 , fetchFromGitHub
 , callPackage
+, runtimeShell
 }:
 let
-  list = import ./data.nix;
+  list = lib.importJSON ./providers.json;
 
-  toDrv = data:
-    buildGoPackage rec {
-      inherit (data) owner repo rev version sha256;
-      name = "${repo}-${version}";
-      goPackagePath = "github.com/${owner}/${repo}";
+  toDrv = name: data:
+    buildGoPackage {
+      pname = data.repo;
+      version = data.version;
+      goPackagePath = "github.com/${data.owner}/${data.repo}";
       subPackages = [ "." ];
       src = fetchFromGitHub {
-        inherit owner repo rev sha256;
+        inherit (data) owner repo rev sha256;
       };
       # Terraform allow checking the provider versions, but this breaks
       # if the versions are not provided via file paths.
-      postBuild = "mv $NIX_BUILD_TOP/go/bin/${repo}{,_v${version}}";
+      postBuild = "mv $NIX_BUILD_TOP/go/bin/${data.repo}{,_v${data.version}}";
+      passthru = data;
     };
 
   # Google is now using the vendored go modules, which works a bit differently
@@ -48,7 +50,7 @@ let
     });
 
   # These providers are managed with the ./update-all script
-  automated-providers = lib.mapAttrs (_: toDrv) list;
+  automated-providers = lib.mapAttrs (toDrv) list;
 
   # These are the providers that don't fall in line with the default model
   special-providers = {
@@ -56,6 +58,13 @@ let
     google = patchGoModVendor automated-providers.google;
     google-beta = patchGoModVendor automated-providers.google-beta;
     ibm = patchGoModVendor automated-providers.ibm;
+
+    acme = automated-providers.acme.overrideAttrs (attrs: {
+      prePatch = attrs.prePatch or "" + ''
+        substituteInPlace go.mod --replace terraform-providers/terraform-provider-acme getstackhead/terraform-provider-acme
+        substituteInPlace main.go --replace terraform-providers/terraform-provider-acme getstackhead/terraform-provider-acme
+      '';
+    });
 
     # providers that were moved to the `hashicorp` organization,
     # but haven't updated their references yet:
@@ -137,6 +146,16 @@ let
       prePatch = attrs.prePatch or "" + ''
         substituteInPlace go.mod --replace terraform-providers/terraform-provider-tls hashicorp/terraform-provider-tls
         substituteInPlace main.go --replace terraform-providers/terraform-provider-tls hashicorp/terraform-provider-tls
+      '';
+    });
+
+    # provider was moved to the `vultr` organization, but kept the old references:
+    # https://github.com/vultr/terraform-provider-vultr/pull/67
+    # this override should be removed as soon as new version (>1.4.1) is released.
+    vultr = automated-providers.vultr.overrideAttrs (attrs: {
+      prePatch = attrs.prePatch or "" + ''
+        substituteInPlace go.mod --replace terraform-providers/terraform-provider-vultr vultr/terraform-provider-vultr
+        substituteInPlace main.go --replace terraform-providers/terraform-provider-vultr vultr/terraform-provider-vultr
       '';
     });
 

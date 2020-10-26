@@ -33,7 +33,7 @@ rec {
       name = "docker-containerd-${version}";
       inherit version;
       src = fetchFromGitHub {
-        owner = "docker";
+        owner = "containerd";
         repo = "containerd";
         rev = containerdRev;
         sha256 = containerdSha256;
@@ -189,7 +189,7 @@ rec {
       homepage = "https://www.docker.com/";
       description = "An open source project to pack, ship and run any application as a lightweight container";
       license = licenses.asl20;
-      maintainers = with maintainers; [ nequissimus offline tailhook vdemeester periklis ];
+      maintainers = with maintainers; [ offline tailhook vdemeester periklis ];
       platforms = with platforms; linux ++ darwin;
     };
   });
