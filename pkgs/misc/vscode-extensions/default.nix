@@ -1,4 +1,4 @@
-{ stdenv, callPackage, vscode-utils, llvmPackages_8, llvmPackages_latest }:
+{ stdenv, callPackage, vscode-utils, nodePackages, llvmPackages_8, llvmPackages_latest }:
 
 let
   inherit (vscode-utils) buildVscodeMarketplaceExtension;
@@ -154,6 +154,21 @@ stdenv.lib.mapAttrs (_n: stdenv.lib.recurseIntoAttrs)
   };
 
   ms-vscode.cpptools = callPackage ./cpptools {};
+
+  ms-python.vscode-pylance = buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "vscode-pylance";
+      publisher = "MS-python";
+      version = "2020.11.0";
+      sha256 = "0gwsz0f11vw4klvc3dydk97vfrhdd5a2ajk0fmkzlr328mv6c4dc";
+    };
+
+    buildInputs = [ nodePackages.pyright ];
+
+    meta = {
+      license = stdenv.lib.licenses.unfree;
+    };
+  };
 
   ms-vscode-remote.remote-ssh = callPackage ./remote-ssh {};
 
