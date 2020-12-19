@@ -25995,6 +25995,8 @@ in
 
   deeptools = callPackage ../applications/science/biology/deeptools { python = python3; };
 
+  polynote = callPackage ../applications/editors/polynote/default.nix { python = python3; };
+
   delly = callPackage ../applications/science/biology/delly { };
 
   diamond = callPackage ../applications/science/biology/diamond { };
