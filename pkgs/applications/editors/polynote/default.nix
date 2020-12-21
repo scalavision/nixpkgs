@@ -3,7 +3,9 @@
 , python
 , openjdk
 , fetchzip
+, makeWrapper
 }:
+
 with python.pkgs;
 buildPythonApplication rec {
 
@@ -48,17 +50,19 @@ buildPythonApplication rec {
   '';
 
   postInstall = ''
-    pwd
     ls -hatl .
     mkdir -p $out/
     mv ./polynote.jar $out/bin
     mv ./static $out/bin
     mv ./deps $out/bin
+    makeWrapper $out/bin/polynote.py \
+      $out/bin/polynote \
+      --argv0 polynote \
+      --set JAVA_HOME ${openjdk}
   '';
 
   src = fetchzip {
     url = "https://github.com/${pname}/${pname}/releases/download/${version}/${pname}-dist-2.12.tar.gz";
-    #sha256 = "1b9w5k0207fysgpxx6db3a00fs5hdc2ncx99x4ccy2s0v5ndc66g";
     sha256 = "0xx7s3l1zzakc9427fkqljgpfndj9s9dfmqmbizmdqr12rsfg7z7";
   };
 
