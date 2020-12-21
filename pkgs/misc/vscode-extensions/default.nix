@@ -254,7 +254,7 @@ let
           name = "metals";
           publisher = "scalameta";
           version = "1.9.10";
-          sha256 = "afmqzlw3bl9bv59l9b2jrljhbq8djb7vl8rjv58c5wi7nvm2qab";
+          sha256 = "1afmqzlw3bl9bv59l9b2jrljhbq8djb7vl8rjv58c5wi7nvm2qab";
         };
         meta = {
           license = stdenv.lib.licenses.asl20;
