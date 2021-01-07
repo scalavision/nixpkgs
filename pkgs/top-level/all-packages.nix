@@ -4444,6 +4444,8 @@ in
   google-music-scripts = callPackage ../tools/audio/google-music-scripts { };
 
   google-cloud-cpp = callPackage ../development/libraries/google-cloud-cpp { };
+  
+  google-test = callPackage ../development/libraries/google-test { };
 
   gdown = with python3Packages; toPythonApplication gdown;
 
@@ -26988,6 +26990,8 @@ in
   diamond = callPackage ../applications/science/biology/diamond { };
 
   ecopcr = callPackage ../applications/science/biology/ecopcr { };
+
+  expansionhunter = callPackage ../applications/science/biology/expansionhunter { };
 
   eggnog-mapper = callPackage ../applications/science/biology/eggnog-mapper { };
 
