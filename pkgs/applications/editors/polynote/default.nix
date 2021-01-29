@@ -47,11 +47,17 @@ buildPythonApplication rec {
     # mkdir ./dist
     # cp ./requirements.txt ./dist
     ls -halt .
+
+    echo "patching"
+    substituteInPlace ./config-template.yml \
+      --replace '#  port: 8192' "  port: 8193"
+    cat ./config-template.yml | grep port
   '';
 
   postInstall = ''
     ls -hatl .
-    mkdir -p $out/
+    mkdir -p $out/bin
+    cp ./config-template.yml $out/bin/config.yml
     mv ./polynote.jar $out/bin
     mv ./static $out/bin
     mv ./deps $out/bin
