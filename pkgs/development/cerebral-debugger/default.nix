@@ -7,11 +7,12 @@
 stdenv.mkDerivation rec {
 
   pname = "cerebral-debugger";
-  version = "3.1.0";
+  version = "2.5.1";
 
   src = fetchurl {
     url = "https://github.com/cerebral/cerebral-debugger/releases/download/v${version}/cerebral-debugger-${version}.tar.gz";
-    sha256 = "0s4wlbcx1kjrpqkb8a8pljjiylq99s6a80ibr03lkq5r4rw2nw58";
+#    sha256 = "0s4wlbcx1kjrpqkb8a8pljjiylq99s6a80ibr03lkq5r4rw2nw57";
+     sha256 = "15vz9hd3jcadj4c30qbkbmqjr64gh0pk776gr5swy4d0w8nfcza9";
   };
 
   dontBuild = true;
