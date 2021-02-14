@@ -7,7 +7,7 @@
 , makeWrapper }:
 # pkgs.python3Packages.buildPythonPackage rec {
 with python3.pkgs;
-buildPythonPackage rec {
+buildPythonApplication rec {
 
   pname = "jep";
   version = "3.9.1";

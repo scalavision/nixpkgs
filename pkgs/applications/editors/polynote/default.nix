@@ -6,6 +6,7 @@ buildPythonApplication rec {
   pname = "polynote";
   version = "0.3.12";
 
+  # This seems to work at least virtualenv and pip was picked up ..
   propagatedBuildInputs = [
     # virtualenv
     ipython
@@ -15,6 +16,8 @@ buildPythonApplication rec {
     pandas
     openjdk8
     jep
+    virtualenv
+    pip
   ];
 
   # checkInputs = [ numpy jep openjdk ];
@@ -35,7 +38,7 @@ buildPythonApplication rec {
         version='${version}',
         scripts=['polynote.py',],
         # packages=find_packages(),
-        install_requires=[ 'ipython', 'nbconvert', 'jedi', 'numpy', 'pandas', 'jep' ],
+        install_requires=[ 'ipython', 'nbconvert', 'jedi', 'numpy', 'pandas', 'jep','virtualenv', 'pip' ],
     )
     EOF
     # mkdir ./dist
