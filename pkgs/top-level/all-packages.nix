@@ -28095,6 +28095,8 @@ in
 
   bwa = callPackage ../applications/science/biology/bwa { };
 
+  bwa-mem2 = callPackage ../applications/science/biology/bwa-mem2 { };
+
   ### SCIENCE/MACHINE LEARNING
 
   sc2-headless = callPackage ../applications/science/machine-learning/sc2-headless { };
