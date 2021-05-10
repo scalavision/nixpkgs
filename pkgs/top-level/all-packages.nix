@@ -29035,6 +29035,8 @@ in
   truvari = callPackage ../applications/science/biology/truvari { };
 
   varscan = callPackage ../applications/science/biology/varscan { };
+  
+  yaha = callPackage ../applications/science/biology/yaha { };
 
   whisper = callPackage ../applications/science/biology/whisper { };
 
