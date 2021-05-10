@@ -28880,6 +28880,8 @@ in
 
   diamond = callPackage ../applications/science/biology/diamond { };
 
+  duphold = callPackage ../applications/science/biology/duphold { };
+
   ecopcr = callPackage ../applications/science/biology/ecopcr { };
 
   eggnog-mapper = callPackage ../applications/science/biology/eggnog-mapper { };
