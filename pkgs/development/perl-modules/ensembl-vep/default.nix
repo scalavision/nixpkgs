@@ -9,7 +9,7 @@
 }:
 buildPerlPackage rec {
 
-    version = "99.1";
+    version = "104.3";
     pname = "ensembl-vep";
     name = pname + "-" + version;
    # https://github.com/Ensembl/ensembl-vep/archive/release/99.1.tar.gz
@@ -17,7 +17,7 @@ buildPerlPackage rec {
       owner = "Ensembl";
       repo = pname;
       rev = "release/${version}";
-      sha256 = "1jajxdbmjv0nrim54p28mm6cpsr0c8wnc2adzgn2413qk36dsll1";
+      sha256 = "sha256:1b03cdvb69cxq9swf5h0ln7mgslsj45h4mlgcjxz153zfrmm280j";
     };
     makeMakerFlags = "--NO_UPDATE";
     # --replace "which curl" "${which}/bin/which ${curl}/bin/curl" \

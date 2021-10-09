@@ -841,8 +841,21 @@ let
     prePatch = ''
     mv Build.PL Makefile.PL
     '';
+
+    installPhase = ''
+      perl Makefile.PL -a
+      ls -ahlt .
+      cat ./Build
+      ./Build installdeps
+      mkdir -p $out/doc
+      mkdir -p $out/docs
+    '';
+
+    docSupport = false;
+
     buildInputs = [ TestMemoryCycle TestWeaken ];
     propagatedBuildInputs = [ 
+      # BioASN1EntrezGene
       DBFile 
       DataStag 
       Error 
@@ -883,7 +896,12 @@ let
       SOAPLite
       ConvertBinaryC
       BioPhylo
+      DBI
+      DBDmysql
+      DBDPg
+      DBDSQLite
     ];
+
     meta = {
       homepage = https://metacpan.org/release/BioPerl;
       description = "Perl modules for biology";
@@ -1000,6 +1018,41 @@ let
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
     };
   };
+
+   BioASN1EntrezGene = buildPerlPackage rec {
+     name = "Bio-ASN1-EntrezGene";
+     src = fetchFromGitHub {
+       owner = "bioperl";
+       repo = name;
+       rev = "Bio-ASN1-EntrezGene-v1.73";
+       sha256 = "sha256:13fvkzbmkyq7pzlvj5fnpi6wgzn12fc173cgzhhmmcjrln3qb998";
+     };
+
+    buildInputs = [ DistZilla ];
+    preConfigure = ''
+      patchShebangs .
+      touch Makefile.PL
+      export PERL_MB_OPT="--install_base=$out --prefix=$out"
+      rm -f Makefile
+    '';
+
+    buildPhase = ''
+      echo "skipping"
+    '';
+
+    installPhase = ''
+      mkdir -p $out
+      # cp -r $src/lib $out/
+      ls -ahlt $out
+      export HOME=$out
+      dzil install
+    '';
+#    propagatedBuildInputs = [ DistZilla ];
+#    installPhase = ''
+#      dzil release
+#    '';
+   };
+
 
    BioPhylo = buildPerlPackage rec {
     name = "Bio-Phylo-v2.0.1";
