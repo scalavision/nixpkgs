@@ -1,17 +1,17 @@
-{
-  autoPatchelfHook,
-  fetchurl,
-  jre,
-  lib,
-  makeWrapper,
-  sourcesJSON ? ./sources.json,
-  stdenvNoCC,
-  zlib,
+{ autoPatchelfHook
+, fetchurl
+, jre
+, lib
+, makeWrapper
+, sourcesJSON ? ./sources.json
+, stdenvNoCC
+, zlib
+,
 }:
 
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "mill";
-  version = "1.0.4";
+  version = "1.0.5";
 
   src =
     let
